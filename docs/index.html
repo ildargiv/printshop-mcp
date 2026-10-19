@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>printshop-mcp: the print shop inside your AI agent</title>
+<meta name="description" content="Your AI agent designs badges, business cards and flyers, shows an exact proof and prints them on your real printer, millimetre-accurate. It remembers every print profile. MCP server + Claude Code skill.">
+<meta property="og:title" content="printshop-mcp: the print shop inside your AI agent">
+<meta property="og:description" content="Millimetre-accurate printing from your AI agent. Remembers your print profiles.">
+<meta property="og:image" content="https://ildargiv.github.io/printshop-mcp/event-kit-a4-proof.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='4' width='20' height='24' fill='%23fff' stroke='%23111' stroke-width='2'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%2300a0e3'/%3E%3Ccircle cx='20' cy='12' r='3' fill='%23e5007d'/%3E%3Ccircle cx='16' cy='19' r='3' fill='%23ffd500'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fbfaf7; --sheet: #ffffff; --ink: #141414; --muted: #5f6066; --line: #e3e1da;
+    --c: #00a0e3; --m: #e5007d; --y: #ffd500; --k: #141414;
+    --code-bg: #f1efe8; --shadow: 0 1px 2px rgba(0,0,0,.06), 0 12px 32px rgba(0,0,0,.08);
+    --display: "Space Grotesk", "Segoe UI", "Helvetica Neue", Arial, "Microsoft YaHei", "Yu Gothic", "Malgun Gothic", "Nirmala UI", Tahoma, sans-serif;
+    --text: "Segoe UI", "Helvetica Neue", Arial, "Microsoft YaHei", "PingFang SC", "Yu Gothic", "Hiragino Sans", "Malgun Gothic", "Nirmala UI", Tahoma, sans-serif;
+    --mono: "JetBrains Mono", Consolas, "SFMono-Regular", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper: #121212; --sheet: #1b1b1b; --ink: #f2f0ea; --muted: #a3a29c; --line: #2c2c2c;
+            --code-bg: #1f1f1f; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.5); --k: #f2f0ea; }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; overflow-x: clip; background: var(--paper); color: var(--ink); font: 17px/1.6 var(--text); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  /* header */
+  header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 88%, transparent);
+           backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar { display: flex; align-items: center; gap: 20px; height: 60px; }
+  .logo { display: flex; align-items: center; gap: 10px; white-space: nowrap; font: 700 18px var(--display); text-decoration: none; }
+  .dots { display: inline-flex; gap: 3px; }
+  .dots i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+  .dots i:nth-child(1) { background: var(--c); } .dots i:nth-child(2) { background: var(--m); }
+  .dots i:nth-child(3) { background: var(--y); } .dots i:nth-child(4) { background: var(--k); }
+  nav { display: flex; gap: 18px; margin-inline-start: auto; align-items: center; font-size: 15px; }
+  nav a { text-decoration: none; color: var(--muted); } nav a:hover { color: var(--ink); }
+  select { font: 14px var(--text); color: var(--ink); background: var(--sheet); border: 1px solid var(--line);
+           border-radius: 8px; padding: 6px 8px; cursor: pointer; }
+  @media (max-width: 720px) { nav a.hide-m { display: none; } .wrap { padding: 0 16px; } }
+
+  /* hero */
+  .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; padding-block: 72px 56px; }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding-block-start: 40px; gap: 40px; } }
+  .kicker { font: 600 13px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--m); }
+  h1 { font: 700 clamp(38px, 6vw, 64px)/1.05 var(--display); letter-spacing: -.02em; margin: 14px 0 20px; }
+  h1 em { font-style: normal; background: linear-gradient(transparent 62%, color-mix(in srgb, var(--y) 70%, transparent) 62%); }
+  .sub { font-size: 19px; color: var(--muted); max-width: 34em; margin: 0 0 30px; }
+  .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 10px; font-weight: 600;
+         text-decoration: none; border: 1px solid var(--ink); font-size: 16px; }
+  .btn.primary { background: var(--ink); color: var(--paper); }
+  .btn:hover { transform: translateY(-1px); }
+  .meta { margin-top: 22px; font: 13px var(--mono); color: var(--muted); }
+
+  /* sheet with crop marks */
+  .sheet { position: relative; padding: 18px; }
+  .sheet img { display: block; width: 100%; height: auto; background: #fff; box-shadow: var(--shadow); border-radius: 2px; }
+  .sheet::before, .sheet::after, .sheet span::before, .sheet span::after { content: ""; position: absolute; width: 14px; height: 14px; border-color: var(--ink); border-style: solid; opacity: .7; }
+  .sheet::before { top: 0; left: 0; border-width: 0 1px 1px 0; }
+  .sheet::after { top: 0; right: 0; border-width: 0 0 1px 1px; }
+  .sheet span::before { bottom: 0; left: 0; border-width: 1px 1px 0 0; }
+  .sheet span::after { bottom: 0; right: 0; border-width: 1px 0 0 1px; }
+  .ruler { display: flex; justify-content: space-between; font: 11px var(--mono); color: var(--muted); margin: 8px 18px 0; }
+  .hero .sheet { transform: rotate(1.5deg); max-width: 440px; justify-self: center; }
+
+  section { padding: 64px 0; }
+  h2 { font: 700 clamp(28px, 4vw, 40px)/1.15 var(--display); letter-spacing: -.01em; margin: 0 0 32px; }
+
+  /* features */
+  .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  @media (max-width: 980px) { .features { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .features { grid-template-columns: 1fr; } }
+  .card { background: var(--sheet); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  .card .ico { width: 34px; height: 34px; border-radius: 50%; margin-bottom: 14px; }
+  .card h3 { font: 700 19px/1.3 var(--display); margin: 0 0 8px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+  /* steps */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; counter-reset: s; border-top: 1px dashed var(--line); }
+  @media (max-width: 820px) { .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .steps { grid-template-columns: 1fr; } }
+  .step { padding: 22px 22px 22px 0; }
+  .step b { display: block; font: 600 13px var(--mono); color: var(--c); margin-bottom: 8px; }
+  .step b::before { counter-increment: s; content: "0" counter(s) " / "; color: var(--muted); }
+  .step h3 { font: 700 20px var(--display); margin: 0 0 6px; }
+  .step p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+  /* compare */
+  table { width: 100%; border-collapse: collapse; font-size: 15.5px; background: var(--sheet); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  th, td { text-align: start; padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font: 600 13px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  td:first-child { color: var(--muted); width: 45%; }
+  tr:last-child td { border-bottom: 0; }
+  td:last-child::before { content: "✓ "; color: var(--c); font-weight: 700; }
+
+  /* templates */
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  @media (max-width: 820px) { .gallery { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; } }
+  .gallery figure { margin: 0; }
+  .gallery figcaption { text-align: center; font: 13px var(--mono); color: var(--muted); margin-top: 6px; }
+
+  /* install */
+  .install { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 820px) { .install { grid-template-columns: 1fr; } }
+  .code { position: relative; background: var(--code-bg); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 18px; }
+  .code h3 { font: 600 13px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 10px; }
+  pre { margin: 0; font: 14px/1.6 var(--mono); white-space: pre-wrap; word-break: break-word; direction: ltr; text-align: left; }
+  .copy { position: absolute; top: 12px; inset-inline-end: 12px; font: 12px var(--mono); padding: 5px 10px; border-radius: 6px;
+          border: 1px solid var(--line); background: var(--sheet); color: var(--ink); cursor: pointer; }
+  .req { color: var(--muted); font-size: 15px; margin-top: 18px; }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; }
+  [dir="rtl"] .hero .sheet { transform: rotate(-1.5deg); }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#"><span class="dots"><i></i><i></i><i></i><i></i></span>printshop-mcp</a>
+    <nav>
+      <a class="hide-m" href="#how" data-i="nav_how">How it works</a>
+      <a class="hide-m" href="#install" data-i="nav_install">Install</a>
+      <a href="https://github.com/ildargiv/printshop-mcp">GitHub</a>
+      <select id="lang" aria-label="Language"></select>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <div class="kicker" data-i="kicker">MCP server + agent skill</div>
+      <h1 data-i="title" data-html>The print shop <em>inside your AI agent</em></h1>
+      <p class="sub" data-i="sub">Your agent designs badges, business cards and flyers, shows you an exact proof and prints them on your real printer, millimetre-accurate. And it remembers every print profile.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#install" data-i="cta_install">Install</a>
+        <a class="btn" href="https://github.com/ildargiv/printshop-mcp" data-i="cta_github">View on GitHub</a>
+      </div>
+      <div class="meta">v0.1 · Windows · MIT · Claude Code · Claude Desktop · Cursor · Codex</div>
+    </div>
+    <div>
+      <div class="sheet"><span></span><img src="event-kit-a4-proof.png" width="778" height="1124" alt="Proof of a mixed A4 sheet with a flyer, badges and business cards"></div>
+      <div class="ruler"><span>0</span><span>105 mm</span><span>210 mm</span></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="features">
+        <div class="card"><div class="ico" style="background:var(--c)"></div><h3 data-i="f1t">Millimetre-accurate</h3><p data-i="f1d">Rendered straight to printer pixels. 1 mm in the design is 1 mm on paper, with no silent “fit to page”.</p></div>
+        <div class="card"><div class="ico" style="background:var(--m)"></div><h3 data-i="f2t">Remembers your profiles</h3><p data-i="f2d">Printer, paper, tray, media, quality, colour, calibration, even vendor-only driver options. Explain once.</p></div>
+        <div class="card"><div class="ico" style="background:var(--y)"></div><h3 data-i="f3t">Proof before print</h3><p data-i="f3d">The agent sees exactly what will print: unprintable margins, clipped names, blurry photos, wrong paper.</p></div>
+        <div class="card"><div class="ico" style="background:var(--k)"></div><h3 data-i="f4t">Mixed sheets</h3><p data-i="f4d">Badges, business cards and flyers packed together with crop marks. Less paper, fewer passes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <h2 data-i="how">How it works</h2>
+      <div class="steps">
+        <div class="step"><b>profiles</b><h3 data-i="s1t">Profiles</h3><p data-i="s1d">The agent picks your saved printer setup, or saves a new one.</p></div>
+        <div class="step"><b>html · mm</b><h3 data-i="s2t">Design</h3><p data-i="s2d">HTML in millimetres, from ready-made templates.</p></div>
+        <div class="step"><b>proof</b><h3 data-i="s3t">Proof</h3><p data-i="s3d">An exact preview with every problem flagged.</p></div>
+        <div class="step"><b>print_job</b><h3 data-i="s4t">Print &amp; learn</h3><p data-i="s4d">Prints, asks how it came out, and fixes the profile for next time.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 data-i="cmp">Why not just Ctrl+P?</h2>
+      <table>
+        <thead><tr><th>Ctrl+P</th><th>printshop-mcp</th></tr></thead>
+        <tbody>
+          <tr><td data-i="c1a">“Fit to page” silently scales: 90 mm becomes 88.7 mm</td><td data-i="c1b">1 mm in the design = 1 mm on paper</td></tr>
+          <tr><td data-i="c2a">Content falls into the unprintable margin</td><td data-i="c2b">The proof shows the real unprintable zone</td></tr>
+          <tr><td data-i="c3a">The agent can’t see the result</td><td data-i="c3b">Proof images and a report on every problem</td></tr>
+          <tr><td data-i="c4a">Settings forgotten every time</td><td data-i="c4b">Named profiles with the full driver state</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 data-i="tpl">Templates included</h2>
+      <div class="gallery">
+        <figure><div class="sheet"><span></span><img src="badges-a4-proof.png" loading="lazy" width="778" height="1124" alt="Badges template proof"></div><figcaption data-i="g1">Badges 90×55 · 10 per A4</figcaption></figure>
+        <figure><div class="sheet"><span></span><img src="business-cards-a4-proof.png" loading="lazy" width="778" height="1124" alt="Business cards template proof"></div><figcaption data-i="g2">Business cards 90×50 · 10 per A4</figcaption></figure>
+        <figure><div class="sheet"><span></span><img src="event-kit-a4-proof.png" loading="lazy" width="778" height="1124" alt="Mixed event kit template proof"></div><figcaption data-i="g3">Event kit · flyer + badges + cards</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap">
+      <h2 data-i="inst">Install</h2>
+      <div class="install">
+        <div class="code"><h3>Claude Code</h3><button class="copy" data-i="copy">Copy</button><pre>/plugin marketplace add ildargiv/printshop-mcp
+/plugin install printshop@printshop-mcp</pre></div>
+        <div class="code"><h3 data-i="any">Any MCP client</h3><button class="copy" data-i="copy">Copy</button><pre>{ "mcpServers": { "printshop": {
+  "command": "uvx",
+  "args": ["--from",
+    "git+https://github.com/ildargiv/printshop-mcp",
+    "printshop-mcp"] } } }</pre></div>
+      </div>
+      <p class="req" data-i="req">Needs uv and Edge or Chrome. Windows today; macOS and Linux are next.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span data-i="foot">Open source · MIT license</span>
+    <span><a href="https://github.com/ildargiv/printshop-mcp">github.com/ildargiv/printshop-mcp</a></span>
+  </div>
+</footer>
+
+<script>
+const LANGS = {
+  en: "English", ru: "Русский", "zh-CN": "简体中文", es: "Español", "pt-BR": "Português", de: "Deutsch", fr: "Français",
+  ja: "日本語", ko: "한국어", it: "Italiano", tr: "Türkçe", pl: "Polski", uk: "Українська", ar: "العربية", hi: "हिन्दी"
+};
+const T = {
+ru: {nav_how:"Как это работает",nav_install:"Установка",kicker:"MCP-сервер + скил для агента",title:"Типография <em>внутри вашего ИИ-агента</em>",
+ sub:"Агент верстает бейджи, визитки и флаеры, показывает точный пробный оттиск и печатает на вашем принтере с точностью до миллиметра. И помнит каждый профиль печати.",
+ cta_install:"Установить",cta_github:"Открыть на GitHub",f1t:"Точно до миллиметра",f1d:"Рендер сразу в пиксели принтера. 1 мм в макете — 1 мм на бумаге, никакого «вписать в страницу».",
+ f2t:"Помнит ваши профили",f2d:"Принтер, бумага, лоток, тип носителя, качество, цвет, калибровка и даже фирменные настройки драйвера. Объясните один раз.",
+ f3t:"Оттиск до печати",f3d:"Агент видит ровно то, что напечатается: непечатные поля, обрезанные имена, мыльные фото, не ту бумагу.",
+ f4t:"Смешанные листы",f4d:"Бейджи, визитки и флаеры на одних листах с метками реза. Меньше бумаги и прогонов.",
+ how:"Как это работает",s1t:"Профили",s1d:"Агент берёт ваш сохранённый профиль принтера или сохраняет новый.",s2t:"Макет",s2d:"HTML в миллиметрах из готовых шаблонов.",
+ s3t:"Оттиск",s3d:"Точное превью, все проблемы отмечены.",s4t:"Печать и обучение",s4d:"Печатает, спрашивает, как вышло, и правит профиль на будущее.",
+ cmp:"Почему не просто Ctrl+P?",c1a:"«Вписать в страницу» тихо масштабирует: 90 мм становятся 88,7",c1b:"1 мм в макете = 1 мм на бумаге",
+ c2a:"Содержимое попадает в непечатное поле",c2b:"Оттиск показывает реальную непечатную зону",c3a:"Агент не видит результат",c3b:"Картинки оттиска и отчёт о каждой проблеме",
+ c4a:"Настройки каждый раз забываются",c4b:"Именованные профили с полным состоянием драйвера",tpl:"Шаблоны в комплекте",g1:"Бейджи 90×55 · 10 на A4",g2:"Визитки 90×50 · 10 на A4",
+ g3:"Набор для мероприятия · флаер + бейджи + визитки",inst:"Установка",any:"Любой MCP-клиент",copy:"Копировать",copied:"Скопировано",
+ req:"Нужны uv и Edge или Chrome. Сейчас Windows, дальше macOS и Linux.",foot:"Открытый код · лицензия MIT"},
+"zh-CN": {nav_how:"工作原理",nav_install:"安装",kicker:"MCP 服务器 + 智能体技能",title:"<em>AI 智能体里的</em>印刷店",
+ sub:"智能体设计胸牌、名片和传单，给你看精确的打印样张，然后在你自己的打印机上以毫米级精度打印。它还会记住每一个打印配置。",
+ cta_install:"安装",cta_github:"在 GitHub 上查看",f1t:"毫米级精度",f1d:"直接渲染到打印机像素。设计中的 1 毫米就是纸上的 1 毫米，不会悄悄“适合页面”。",
+ f2t:"记住你的配置",f2d:"打印机、纸张、纸盒、介质、质量、色彩、校准，甚至厂商专有的驱动选项。只需说明一次。",
+ f3t:"先看样张再打印",f3d:"智能体能准确看到将要打印的内容：不可打印边距、被截断的名字、模糊的照片、错误的纸张。",
+ f4t:"混合拼版",f4d:"胸牌、名片和传单拼在同一张纸上，带裁切线。更省纸，更少走纸。",
+ how:"工作原理",s1t:"配置",s1d:"智能体选择你保存的打印机配置，或保存新的配置。",s2t:"设计",s2d:"基于现成模板、以毫米为单位的 HTML。",
+ s3t:"样张",s3d:"精确预览，所有问题都会标出。",s4t:"打印与学习",s4d:"打印后询问效果，并为下次修正配置。",
+ cmp:"为什么不直接 Ctrl+P？",c1a:"“适合页面”悄悄缩放：90 毫米变成 88.7 毫米",c1b:"设计中 1 毫米 = 纸上 1 毫米",
+ c2a:"内容落入不可打印边距",c2b:"样张显示真实的不可打印区域",c3a:"智能体看不到结果",c3b:"样张图片及每个问题的报告",
+ c4a:"每次都忘记设置",c4b:"保存完整驱动状态的命名配置",tpl:"内置模板",g1:"胸牌 90×55 · 每张 A4 10 个",g2:"名片 90×50 · 每张 A4 10 张",
+ g3:"活动套装 · 传单 + 胸牌 + 名片",inst:"安装",any:"任意 MCP 客户端",copy:"复制",copied:"已复制",
+ req:"需要 uv 以及 Edge 或 Chrome。目前支持 Windows，macOS 和 Linux 即将推出。",foot:"开源 · MIT 许可证"},
+es: {nav_how:"Cómo funciona",nav_install:"Instalar",kicker:"Servidor MCP + skill para agentes",title:"La imprenta <em>dentro de tu agente de IA</em>",
+ sub:"Tu agente diseña acreditaciones, tarjetas de visita y flyers, te muestra una prueba exacta y los imprime en tu impresora real con precisión milimétrica. Y recuerda cada perfil de impresión.",
+ cta_install:"Instalar",cta_github:"Ver en GitHub",f1t:"Precisión milimétrica",f1d:"Renderizado directo a píxeles de la impresora. 1 mm en el diseño es 1 mm en papel, sin «ajustar a la página».",
+ f2t:"Recuerda tus perfiles",f2d:"Impresora, papel, bandeja, soporte, calidad, color, calibración e incluso opciones propias del fabricante. Lo explicas una vez.",
+ f3t:"Prueba antes de imprimir",f3d:"El agente ve exactamente lo que se imprimirá: márgenes no imprimibles, nombres cortados, fotos borrosas, papel incorrecto.",
+ f4t:"Hojas mixtas",f4d:"Acreditaciones, tarjetas y flyers juntos con marcas de corte. Menos papel y menos pasadas.",
+ how:"Cómo funciona",s1t:"Perfiles",s1d:"El agente elige tu configuración guardada o guarda una nueva.",s2t:"Diseño",s2d:"HTML en milímetros a partir de plantillas listas.",
+ s3t:"Prueba",s3d:"Una vista previa exacta con cada problema señalado.",s4t:"Imprime y aprende",s4d:"Imprime, pregunta cómo salió y corrige el perfil para la próxima vez.",
+ cmp:"¿Por qué no simplemente Ctrl+P?",c1a:"«Ajustar a la página» escala sin avisar: 90 mm pasan a 88,7 mm",c1b:"1 mm en el diseño = 1 mm en papel",
+ c2a:"El contenido cae en el margen no imprimible",c2b:"La prueba muestra la zona no imprimible real",c3a:"El agente no ve el resultado",c3b:"Imágenes de prueba e informe de cada problema",
+ c4a:"Los ajustes se olvidan cada vez",c4b:"Perfiles con nombre con el estado completo del controlador",tpl:"Plantillas incluidas",g1:"Acreditaciones 90×55 · 10 por A4",g2:"Tarjetas 90×50 · 10 por A4",
+ g3:"Kit de evento · flyer + acreditaciones + tarjetas",inst:"Instalar",any:"Cualquier cliente MCP",copy:"Copiar",copied:"Copiado",
+ req:"Requiere uv y Edge o Chrome. Hoy Windows; macOS y Linux, próximamente.",foot:"Código abierto · licencia MIT"},
+"pt-BR": {nav_how:"Como funciona",nav_install:"Instalar",kicker:"Servidor MCP + skill para agentes",title:"A gráfica <em>dentro do seu agente de IA</em>",
+ sub:"Seu agente cria crachás, cartões de visita e flyers, mostra uma prova exata e imprime na sua impressora de verdade com precisão milimétrica. E lembra cada perfil de impressão.",
+ cta_install:"Instalar",cta_github:"Ver no GitHub",f1t:"Precisão milimétrica",f1d:"Renderização direta em pixels da impressora. 1 mm no design é 1 mm no papel, sem «ajustar à página».",
+ f2t:"Lembra seus perfis",f2d:"Impressora, papel, bandeja, mídia, qualidade, cor, calibração e até opções exclusivas do fabricante. Explique uma vez.",
+ f3t:"Prova antes de imprimir",f3d:"O agente vê exatamente o que será impresso: margens não imprimíveis, nomes cortados, fotos borradas, papel errado.",
+ f4t:"Folhas mistas",f4d:"Crachás, cartões e flyers juntos com marcas de corte. Menos papel, menos passadas.",
+ how:"Como funciona",s1t:"Perfis",s1d:"O agente escolhe sua configuração salva ou salva uma nova.",s2t:"Design",s2d:"HTML em milímetros a partir de modelos prontos.",
+ s3t:"Prova",s3d:"Uma prévia exata com cada problema sinalizado.",s4t:"Imprime e aprende",s4d:"Imprime, pergunta como ficou e corrige o perfil para a próxima vez.",
+ cmp:"Por que não só Ctrl+P?",c1a:"«Ajustar à página» muda a escala sem avisar: 90 mm viram 88,7 mm",c1b:"1 mm no design = 1 mm no papel",
+ c2a:"O conteúdo cai na margem não imprimível",c2b:"A prova mostra a área não imprimível real",c3a:"O agente não vê o resultado",c3b:"Imagens de prova e relatório de cada problema",
+ c4a:"As configurações são esquecidas",c4b:"Perfis nomeados com o estado completo do driver",tpl:"Modelos incluídos",g1:"Crachás 90×55 · 10 por A4",g2:"Cartões 90×50 · 10 por A4",
+ g3:"Kit de evento · flyer + crachás + cartões",inst:"Instalar",any:"Qualquer cliente MCP",copy:"Copiar",copied:"Copiado",
+ req:"Requer uv e Edge ou Chrome. Hoje Windows; macOS e Linux em breve.",foot:"Código aberto · licença MIT"},
+de: {nav_how:"So funktioniert’s",nav_install:"Installation",kicker:"MCP-Server + Agenten-Skill",title:"Die Druckerei <em>in deinem KI-Agenten</em>",
+ sub:"Dein Agent gestaltet Namensschilder, Visitenkarten und Flyer, zeigt dir einen exakten Probedruck und druckt millimetergenau auf deinem echten Drucker. Und er merkt sich jedes Druckprofil.",
+ cta_install:"Installieren",cta_github:"Auf GitHub ansehen",f1t:"Millimetergenau",f1d:"Direkt in Druckerpixel gerendert. 1 mm im Entwurf ist 1 mm auf Papier, ohne heimliches „An Seite anpassen“.",
+ f2t:"Merkt sich deine Profile",f2d:"Drucker, Papier, Fach, Medium, Qualität, Farbe, Kalibrierung, sogar herstellerspezifische Treiberoptionen. Einmal erklären.",
+ f3t:"Probedruck vor dem Druck",f3d:"Der Agent sieht genau, was gedruckt wird: nicht bedruckbare Ränder, abgeschnittene Namen, unscharfe Fotos, falsches Papier.",
+ f4t:"Gemischte Bögen",f4d:"Namensschilder, Visitenkarten und Flyer zusammen mit Schnittmarken. Weniger Papier, weniger Durchläufe.",
+ how:"So funktioniert’s",s1t:"Profile",s1d:"Der Agent wählt deine gespeicherte Druckereinstellung oder speichert eine neue.",s2t:"Gestaltung",s2d:"HTML in Millimetern aus fertigen Vorlagen.",
+ s3t:"Probedruck",s3d:"Eine exakte Vorschau, jedes Problem markiert.",s4t:"Drucken & lernen",s4d:"Druckt, fragt nach dem Ergebnis und korrigiert das Profil fürs nächste Mal.",
+ cmp:"Warum nicht einfach Strg+P?",c1a:"„An Seite anpassen“ skaliert still: aus 90 mm werden 88,7 mm",c1b:"1 mm im Entwurf = 1 mm auf Papier",
+ c2a:"Inhalt landet im nicht bedruckbaren Rand",c2b:"Der Probedruck zeigt den echten nicht bedruckbaren Bereich",c3a:"Der Agent sieht das Ergebnis nicht",c3b:"Probedruck-Bilder und ein Bericht zu jedem Problem",
+ c4a:"Einstellungen jedes Mal vergessen",c4b:"Benannte Profile mit vollständigem Treiberzustand",tpl:"Vorlagen inklusive",g1:"Namensschilder 90×55 · 10 pro A4",g2:"Visitenkarten 90×50 · 10 pro A4",
+ g3:"Event-Kit · Flyer + Namensschilder + Karten",inst:"Installation",any:"Jeder MCP-Client",copy:"Kopieren",copied:"Kopiert",
+ req:"Benötigt uv und Edge oder Chrome. Heute Windows; macOS und Linux folgen.",foot:"Open Source · MIT-Lizenz"},
+fr: {nav_how:"Fonctionnement",nav_install:"Installation",kicker:"Serveur MCP + skill pour agents",title:"L’imprimerie <em>dans votre agent IA</em>",
+ sub:"Votre agent conçoit badges, cartes de visite et flyers, vous montre une épreuve exacte et les imprime sur votre vraie imprimante, au millimètre près. Et il retient chaque profil d’impression.",
+ cta_install:"Installer",cta_github:"Voir sur GitHub",f1t:"Au millimètre près",f1d:"Rendu direct en pixels de l’imprimante. 1 mm dans la maquette = 1 mm sur papier, sans « ajuster à la page ».",
+ f2t:"Retient vos profils",f2d:"Imprimante, papier, bac, support, qualité, couleur, calibrage, et même les options propres au fabricant. Expliquez une fois.",
+ f3t:"Épreuve avant impression",f3d:"L’agent voit exactement ce qui sera imprimé : marges non imprimables, noms coupés, photos floues, mauvais papier.",
+ f4t:"Feuilles mixtes",f4d:"Badges, cartes et flyers ensemble avec traits de coupe. Moins de papier, moins de passages.",
+ how:"Fonctionnement",s1t:"Profils",s1d:"L’agent choisit votre réglage enregistré ou en enregistre un nouveau.",s2t:"Mise en page",s2d:"Du HTML en millimètres à partir de modèles prêts à l’emploi.",
+ s3t:"Épreuve",s3d:"Un aperçu exact, chaque problème signalé.",s4t:"Impression et apprentissage",s4d:"Imprime, demande le résultat et corrige le profil pour la prochaine fois.",
+ cmp:"Pourquoi pas simplement Ctrl+P ?",c1a:"« Ajuster à la page » réduit sans prévenir : 90 mm deviennent 88,7 mm",c1b:"1 mm dans la maquette = 1 mm sur papier",
+ c2a:"Le contenu tombe dans la marge non imprimable",c2b:"L’épreuve montre la vraie zone non imprimable",c3a:"L’agent ne voit pas le résultat",c3b:"Images d’épreuve et rapport sur chaque problème",
+ c4a:"Les réglages sont oubliés à chaque fois",c4b:"Profils nommés avec l’état complet du pilote",tpl:"Modèles inclus",g1:"Badges 90×55 · 10 par A4",g2:"Cartes de visite 90×50 · 10 par A4",
+ g3:"Kit événement · flyer + badges + cartes",inst:"Installation",any:"Tout client MCP",copy:"Copier",copied:"Copié",
+ req:"Nécessite uv et Edge ou Chrome. Windows aujourd’hui ; macOS et Linux ensuite.",foot:"Open source · licence MIT"},
+ja: {nav_how:"仕組み",nav_install:"インストール",kicker:"MCP サーバー + エージェントスキル",title:"<em>AI エージェントの中の</em>印刷所",
+ sub:"エージェントが名札・名刺・チラシをデザインし、正確なプルーフを見せてから、あなたの実際のプリンターでミリ単位の精度で印刷します。そしてすべての印刷プロファイルを記憶します。",
+ cta_install:"インストール",cta_github:"GitHub で見る",f1t:"ミリ単位の精度",f1d:"プリンターのピクセルに直接レンダリング。デザインの 1 mm は紙の 1 mm。勝手な「ページに合わせる」はありません。",
+ f2t:"プロファイルを記憶",f2d:"プリンター、用紙、トレイ、用紙種類、品質、色、キャリブレーション、メーカー独自のドライバー設定まで。説明は一度だけ。",
+ f3t:"印刷前にプルーフ",f3d:"印刷されるものをエージェントが正確に確認：印刷不可の余白、切れた名前、ぼやけた写真、用紙違い。",
+ f4t:"混在面付け",f4d:"名札・名刺・チラシをトンボ付きで一枚に。用紙も手間も少なく。",
+ how:"仕組み",s1t:"プロファイル",s1d:"保存済みのプリンター設定を選ぶか、新しく保存します。",s2t:"デザイン",s2d:"既製テンプレートからミリ単位の HTML を作成。",
+ s3t:"プルーフ",s3d:"すべての問題を示した正確なプレビュー。",s4t:"印刷と学習",s4d:"印刷し、仕上がりを確認して、次回のためにプロファイルを修正。",
+ cmp:"なぜ Ctrl+P ではだめなのか",c1a:"「ページに合わせる」が黙って縮小：90 mm が 88.7 mm に",c1b:"デザインの 1 mm = 紙の 1 mm",
+ c2a:"内容が印刷できない余白にかかる",c2b:"プルーフに実際の印刷不可領域を表示",c3a:"エージェントには結果が見えない",c3b:"プルーフ画像とすべての問題のレポート",
+ c4a:"毎回設定を忘れる",c4b:"ドライバーの全設定を保存した名前付きプロファイル",tpl:"同梱テンプレート",g1:"名札 90×55 · A4 に 10 枚",g2:"名刺 90×50 · A4 に 10 枚",
+ g3:"イベントキット · チラシ + 名札 + 名刺",inst:"インストール",any:"任意の MCP クライアント",copy:"コピー",copied:"コピーしました",
+ req:"uv と Edge または Chrome が必要です。現在は Windows、次は macOS と Linux。",foot:"オープンソース · MIT ライセンス"},
+ko: {nav_how:"작동 방식",nav_install:"설치",kicker:"MCP 서버 + 에이전트 스킬",title:"<em>AI 에이전트 안의</em> 인쇄소",
+ sub:"에이전트가 명찰, 명함, 전단지를 디자인하고 정확한 교정쇄를 보여 준 다음 실제 프린터로 밀리미터 단위까지 정확하게 인쇄합니다. 그리고 모든 인쇄 프로필을 기억합니다.",
+ cta_install:"설치",cta_github:"GitHub에서 보기",f1t:"밀리미터 정확도",f1d:"프린터 픽셀로 직접 렌더링합니다. 디자인의 1 mm는 종이의 1 mm, 몰래 \"페이지에 맞춤\"은 없습니다.",
+ f2t:"프로필 기억",f2d:"프린터, 용지, 급지함, 용지 종류, 품질, 색상, 보정, 제조사 전용 드라이버 옵션까지. 한 번만 설명하세요.",
+ f3t:"인쇄 전 교정쇄",f3d:"에이전트가 인쇄될 결과를 정확히 봅니다: 인쇄 불가 여백, 잘린 이름, 흐린 사진, 잘못된 용지.",
+ f4t:"혼합 시트",f4d:"명찰, 명함, 전단지를 재단선과 함께 한 장에. 용지와 출력 횟수를 줄입니다.",
+ how:"작동 방식",s1t:"프로필",s1d:"저장된 프린터 설정을 고르거나 새로 저장합니다.",s2t:"디자인",s2d:"기성 템플릿으로 만드는 밀리미터 단위 HTML.",
+ s3t:"교정쇄",s3d:"모든 문제가 표시된 정확한 미리보기.",s4t:"인쇄와 학습",s4d:"인쇄 후 결과를 묻고 다음을 위해 프로필을 수정합니다.",
+ cmp:"왜 그냥 Ctrl+P가 아닌가?",c1a:"\"페이지에 맞춤\"이 몰래 축소: 90 mm가 88.7 mm로",c1b:"디자인 1 mm = 종이 1 mm",
+ c2a:"내용이 인쇄 불가 여백에 들어감",c2b:"교정쇄에 실제 인쇄 불가 영역 표시",c3a:"에이전트가 결과를 볼 수 없음",c3b:"교정쇄 이미지와 모든 문제에 대한 보고서",
+ c4a:"매번 설정을 잊음",c4b:"드라이버 전체 상태를 담은 이름 있는 프로필",tpl:"포함된 템플릿",g1:"명찰 90×55 · A4당 10개",g2:"명함 90×50 · A4당 10장",
+ g3:"행사 키트 · 전단지 + 명찰 + 명함",inst:"설치",any:"모든 MCP 클라이언트",copy:"복사",copied:"복사됨",
+ req:"uv와 Edge 또는 Chrome이 필요합니다. 현재 Windows, 다음은 macOS와 Linux.",foot:"오픈 소스 · MIT 라이선스"},
+it: {nav_how:"Come funziona",nav_install:"Installazione",kicker:"Server MCP + skill per agenti",title:"La tipografia <em>dentro il tuo agente IA</em>",
+ sub:"Il tuo agente progetta badge, biglietti da visita e volantini, ti mostra una prova esatta e li stampa sulla tua vera stampante con precisione millimetrica. E ricorda ogni profilo di stampa.",
+ cta_install:"Installa",cta_github:"Vedi su GitHub",f1t:"Precisione millimetrica",f1d:"Rendering diretto nei pixel della stampante. 1 mm nel progetto è 1 mm su carta, senza «adatta alla pagina».",
+ f2t:"Ricorda i tuoi profili",f2d:"Stampante, carta, cassetto, supporto, qualità, colore, calibrazione e perfino le opzioni proprietarie del driver. Lo spieghi una volta.",
+ f3t:"Prova prima di stampare",f3d:"L’agente vede esattamente cosa verrà stampato: margini non stampabili, nomi tagliati, foto sfocate, carta sbagliata.",
+ f4t:"Fogli misti",f4d:"Badge, biglietti e volantini insieme con segni di taglio. Meno carta, meno passaggi.",
+ how:"Come funziona",s1t:"Profili",s1d:"L’agente sceglie la tua configurazione salvata o ne salva una nuova.",s2t:"Impaginazione",s2d:"HTML in millimetri partendo da modelli pronti.",
+ s3t:"Prova",s3d:"Un’anteprima esatta con ogni problema segnalato.",s4t:"Stampa e impara",s4d:"Stampa, chiede com’è venuta e corregge il profilo per la prossima volta.",
+ cmp:"Perché non semplicemente Ctrl+P?",c1a:"«Adatta alla pagina» riduce senza avvisare: 90 mm diventano 88,7 mm",c1b:"1 mm nel progetto = 1 mm su carta",
+ c2a:"Il contenuto finisce nel margine non stampabile",c2b:"La prova mostra la vera area non stampabile",c3a:"L’agente non vede il risultato",c3b:"Immagini di prova e report su ogni problema",
+ c4a:"Le impostazioni si perdono ogni volta",c4b:"Profili con nome con lo stato completo del driver",tpl:"Modelli inclusi",g1:"Badge 90×55 · 10 per A4",g2:"Biglietti 90×50 · 10 per A4",
+ g3:"Kit evento · volantino + badge + biglietti",inst:"Installazione",any:"Qualsiasi client MCP",copy:"Copia",copied:"Copiato",
+ req:"Richiede uv ed Edge o Chrome. Oggi Windows; macOS e Linux in arrivo.",foot:"Open source · licenza MIT"},
+tr: {nav_how:"Nasıl çalışır",nav_install:"Kurulum",kicker:"MCP sunucusu + ajan becerisi",title:"<em>Yapay zekâ ajanınızın içindeki</em> matbaa",
+ sub:"Ajanınız yaka kartı, kartvizit ve el ilanı tasarlar, size birebir bir prova gösterir ve gerçek yazıcınızda milimetre hassasiyetiyle basar. Ve her baskı profilini hatırlar.",
+ cta_install:"Kur",cta_github:"GitHub’da gör",f1t:"Milimetre hassasiyeti",f1d:"Doğrudan yazıcı piksellerine işlenir. Tasarımdaki 1 mm kâğıtta 1 mm’dir, gizli “sayfaya sığdır” yok.",
+ f2t:"Profillerinizi hatırlar",f2d:"Yazıcı, kâğıt, tepsi, ortam, kalite, renk, kalibrasyon, hatta üreticiye özel sürücü seçenekleri. Bir kez anlatın.",
+ f3t:"Baskıdan önce prova",f3d:"Ajan neyin basılacağını tam olarak görür: basılamayan kenarlar, kesik isimler, bulanık fotoğraflar, yanlış kâğıt.",
+ f4t:"Karma sayfalar",f4d:"Yaka kartı, kartvizit ve el ilanı kesim işaretleriyle bir arada. Daha az kâğıt, daha az geçiş.",
+ how:"Nasıl çalışır",s1t:"Profiller",s1d:"Ajan kayıtlı yazıcı ayarınızı seçer ya da yenisini kaydeder.",s2t:"Tasarım",s2d:"Hazır şablonlardan milimetre cinsinden HTML.",
+ s3t:"Prova",s3d:"Her sorunun işaretlendiği birebir önizleme.",s4t:"Bas ve öğren",s4d:"Basar, sonucu sorar ve profili bir dahaki sefere düzeltir.",
+ cmp:"Neden sadece Ctrl+P değil?",c1a:"“Sayfaya sığdır” sessizce küçültür: 90 mm, 88,7 mm olur",c1b:"Tasarımda 1 mm = kâğıtta 1 mm",
+ c2a:"İçerik basılamayan kenara taşar",c2b:"Prova gerçek basılamayan alanı gösterir",c3a:"Ajan sonucu göremez",c3b:"Prova görselleri ve her sorun için rapor",
+ c4a:"Ayarlar her seferinde unutulur",c4b:"Tam sürücü durumunu saklayan adlandırılmış profiller",tpl:"Dahil şablonlar",g1:"Yaka kartı 90×55 · A4’te 10",g2:"Kartvizit 90×50 · A4’te 10",
+ g3:"Etkinlik seti · el ilanı + yaka kartı + kartvizit",inst:"Kurulum",any:"Herhangi bir MCP istemcisi",copy:"Kopyala",copied:"Kopyalandı",
+ req:"uv ve Edge veya Chrome gerekir. Şimdilik Windows; sırada macOS ve Linux var.",foot:"Açık kaynak · MIT lisansı"},
+pl: {nav_how:"Jak to działa",nav_install:"Instalacja",kicker:"Serwer MCP + skill dla agentów",title:"Drukarnia <em>w Twoim agencie AI</em>",
+ sub:"Agent projektuje identyfikatory, wizytówki i ulotki, pokazuje dokładny wydruk próbny i drukuje je na Twojej prawdziwej drukarce z milimetrową dokładnością. I pamięta każdy profil drukowania.",
+ cta_install:"Zainstaluj",cta_github:"Zobacz na GitHubie",f1t:"Co do milimetra",f1d:"Renderowanie wprost do pikseli drukarki. 1 mm w projekcie to 1 mm na papierze, bez ukrytego „dopasuj do strony”.",
+ f2t:"Pamięta Twoje profile",f2d:"Drukarka, papier, podajnik, nośnik, jakość, kolor, kalibracja, a nawet opcje sterownika producenta. Wyjaśniasz raz.",
+ f3t:"Wydruk próbny przed drukiem",f3d:"Agent widzi dokładnie, co zostanie wydrukowane: marginesy, ucięte nazwiska, rozmyte zdjęcia, zły papier.",
+ f4t:"Arkusze mieszane",f4d:"Identyfikatory, wizytówki i ulotki razem ze znacznikami cięcia. Mniej papieru, mniej przebiegów.",
+ how:"Jak to działa",s1t:"Profile",s1d:"Agent wybiera zapisane ustawienia drukarki albo zapisuje nowe.",s2t:"Projekt",s2d:"HTML w milimetrach z gotowych szablonów.",
+ s3t:"Wydruk próbny",s3d:"Dokładny podgląd z zaznaczonym każdym problemem.",s4t:"Druk i nauka",s4d:"Drukuje, pyta o efekt i poprawia profil na przyszłość.",
+ cmp:"Dlaczego nie po prostu Ctrl+P?",c1a:"„Dopasuj do strony” po cichu skaluje: 90 mm zmienia się w 88,7 mm",c1b:"1 mm w projekcie = 1 mm na papierze",
+ c2a:"Treść trafia na niezadrukowywalny margines",c2b:"Wydruk próbny pokazuje prawdziwy obszar niezadrukowywalny",c3a:"Agent nie widzi efektu",c3b:"Obrazy próbne i raport o każdym problemie",
+ c4a:"Ustawienia za każdym razem giną",c4b:"Nazwane profile z pełnym stanem sterownika",tpl:"Szablony w zestawie",g1:"Identyfikatory 90×55 · 10 na A4",g2:"Wizytówki 90×50 · 10 na A4",
+ g3:"Zestaw na wydarzenie · ulotka + identyfikatory + wizytówki",inst:"Instalacja",any:"Dowolny klient MCP",copy:"Kopiuj",copied:"Skopiowano",
+ req:"Wymaga uv oraz Edge lub Chrome. Dziś Windows; wkrótce macOS i Linux.",foot:"Open source · licencja MIT"},
+uk: {nav_how:"Як це працює",nav_install:"Встановлення",kicker:"MCP-сервер + скіл для агента",title:"Друкарня <em>всередині вашого ШІ-агента</em>",
+ sub:"Агент верстає бейджі, візитки й флаєри, показує точний пробний відбиток і друкує на вашому принтері з точністю до міліметра. І пам’ятає кожен профіль друку.",
+ cta_install:"Встановити",cta_github:"Відкрити на GitHub",f1t:"Точно до міліметра",f1d:"Рендер одразу в пікселі принтера. 1 мм у макеті — 1 мм на папері, жодного «вмістити на сторінку».",
+ f2t:"Пам’ятає ваші профілі",f2d:"Принтер, папір, лоток, тип носія, якість, колір, калібрування і навіть фірмові налаштування драйвера. Поясніть один раз.",
+ f3t:"Відбиток до друку",f3d:"Агент бачить саме те, що надрукується: недруковані поля, обрізані імена, розмиті фото, не той папір.",
+ f4t:"Змішані аркуші",f4d:"Бейджі, візитки й флаєри на спільних аркушах із мітками різу. Менше паперу й прогонів.",
+ how:"Як це працює",s1t:"Профілі",s1d:"Агент бере ваш збережений профіль принтера або зберігає новий.",s2t:"Макет",s2d:"HTML у міліметрах із готових шаблонів.",
+ s3t:"Відбиток",s3d:"Точне прев’ю, всі проблеми позначені.",s4t:"Друк і навчання",s4d:"Друкує, питає, як вийшло, і виправляє профіль на майбутнє.",
+ cmp:"Чому не просто Ctrl+P?",c1a:"«Вмістити на сторінку» непомітно масштабує: 90 мм стають 88,7",c1b:"1 мм у макеті = 1 мм на папері",
+ c2a:"Вміст потрапляє в недрукований край",c2b:"Відбиток показує справжню недруковану зону",c3a:"Агент не бачить результату",c3b:"Зображення відбитка і звіт про кожну проблему",
+ c4a:"Налаштування щоразу забуваються",c4b:"Іменовані профілі з повним станом драйвера",tpl:"Шаблони в комплекті",g1:"Бейджі 90×55 · 10 на A4",g2:"Візитки 90×50 · 10 на A4",
+ g3:"Набір для заходу · флаєр + бейджі + візитки",inst:"Встановлення",any:"Будь-який MCP-клієнт",copy:"Копіювати",copied:"Скопійовано",
+ req:"Потрібні uv та Edge або Chrome. Зараз Windows, далі macOS і Linux.",foot:"Відкритий код · ліцензія MIT"},
+ar: {nav_how:"كيف يعمل",nav_install:"التثبيت",kicker:"خادم MCP + مهارة للوكيل",title:"المطبعة <em>داخل وكيل الذكاء الاصطناعي</em>",
+ sub:"يصمّم وكيلك بطاقات التعريف وبطاقات العمل والنشرات، ويعرض عليك بروفة دقيقة، ثم يطبعها على طابعتك الحقيقية بدقة المليمتر. ويتذكّر كل ملف طباعة.",
+ cta_install:"ثبّت الآن",cta_github:"عرض على GitHub",f1t:"دقة المليمتر",f1d:"عرض مباشر بوحدات بكسل الطابعة. 1 مم في التصميم = 1 مم على الورق، دون «ملاءمة للصفحة» خفية.",
+ f2t:"يتذكّر ملفاتك",f2d:"الطابعة والورق والدرج والوسائط والجودة والألوان والمعايرة، وحتى خيارات برنامج التشغيل الخاصة بالمصنّع. اشرح مرة واحدة.",
+ f3t:"بروفة قبل الطباعة",f3d:"يرى الوكيل بالضبط ما سيُطبع: الهوامش غير القابلة للطباعة، والأسماء المقطوعة، والصور الضبابية، والورق الخاطئ.",
+ f4t:"أوراق مختلطة",f4d:"بطاقات تعريف وبطاقات عمل ونشرات معًا مع علامات القص. ورق أقل وتمريرات أقل.",
+ how:"كيف يعمل",s1t:"الملفات",s1d:"يختار الوكيل إعداد الطابعة المحفوظ أو يحفظ إعدادًا جديدًا.",s2t:"التصميم",s2d:"HTML بالمليمتر من قوالب جاهزة.",
+ s3t:"البروفة",s3d:"معاينة دقيقة مع تمييز كل مشكلة.",s4t:"اطبع وتعلّم",s4d:"يطبع، ويسأل عن النتيجة، ويصحّح الملف للمرة القادمة.",
+ cmp:"لماذا لا نكتفي بـ Ctrl+P؟",c1a:"«ملاءمة للصفحة» تصغّر بصمت: 90 مم تصبح 88.7 مم",c1b:"1 مم في التصميم = 1 مم على الورق",
+ c2a:"يقع المحتوى في الهامش غير القابل للطباعة",c2b:"تُظهر البروفة المنطقة غير القابلة للطباعة فعليًا",c3a:"لا يرى الوكيل النتيجة",c3b:"صور البروفة وتقرير عن كل مشكلة",
+ c4a:"تُنسى الإعدادات في كل مرة",c4b:"ملفات مسمّاة تحفظ حالة برنامج التشغيل كاملة",tpl:"قوالب مضمّنة",g1:"بطاقات تعريف 90×55 · 10 في كل A4",g2:"بطاقات عمل 90×50 · 10 في كل A4",
+ g3:"حزمة فعالية · نشرة + بطاقات تعريف + بطاقات عمل",inst:"التثبيت",any:"أي عميل MCP",copy:"نسخ",copied:"تم النسخ",
+ req:"يتطلّب uv ومتصفح Edge أو Chrome. ويندوز حاليًا، وmacOS وLinux قريبًا.",foot:"مفتوح المصدر · ترخيص MIT"},
+hi: {nav_how:"कैसे काम करता है",nav_install:"इंस्टॉल",kicker:"MCP सर्वर + एजेंट स्किल",title:"<em>आपके AI एजेंट के अंदर</em> प्रिंटिंग प्रेस",
+ sub:"आपका एजेंट बैज, विज़िटिंग कार्ड और फ़्लायर डिज़ाइन करता है, सटीक प्रूफ़ दिखाता है और आपके असली प्रिंटर पर मिलीमीटर की सटीकता से छापता है। और हर प्रिंट प्रोफ़ाइल याद रखता है।",
+ cta_install:"इंस्टॉल करें",cta_github:"GitHub पर देखें",f1t:"मिलीमीटर तक सटीक",f1d:"सीधे प्रिंटर पिक्सल में रेंडर। डिज़ाइन का 1 mm काग़ज़ पर 1 mm, कोई छिपा \"पेज में फ़िट\" नहीं।",
+ f2t:"आपकी प्रोफ़ाइल याद रखता है",f2d:"प्रिंटर, काग़ज़, ट्रे, मीडिया, गुणवत्ता, रंग, कैलिब्रेशन, यहाँ तक कि निर्माता के ख़ास ड्राइवर विकल्प भी। एक बार समझाइए।",
+ f3t:"छापने से पहले प्रूफ़",f3d:"एजेंट ठीक वही देखता है जो छपेगा: न छपने वाले किनारे, कटे नाम, धुंधली फ़ोटो, ग़लत काग़ज़।",
+ f4t:"मिश्रित शीट",f4d:"बैज, कार्ड और फ़्लायर कटिंग मार्क के साथ एक साथ। कम काग़ज़, कम बार छपाई।",
+ how:"कैसे काम करता है",s1t:"प्रोफ़ाइल",s1d:"एजेंट आपकी सहेजी प्रिंटर सेटिंग चुनता है या नई सहेजता है।",s2t:"डिज़ाइन",s2d:"तैयार टेम्पलेट से मिलीमीटर में HTML।",
+ s3t:"प्रूफ़",s3d:"हर समस्या चिह्नित, सटीक पूर्वावलोकन।",s4t:"छापें और सीखें",s4d:"छापता है, नतीजा पूछता है और अगली बार के लिए प्रोफ़ाइल ठीक करता है।",
+ cmp:"सिर्फ़ Ctrl+P क्यों नहीं?",c1a:"\"पेज में फ़िट\" चुपचाप छोटा करता है: 90 mm बनता है 88.7 mm",c1b:"डिज़ाइन में 1 mm = काग़ज़ पर 1 mm",
+ c2a:"सामग्री न छपने वाले किनारे में चली जाती है",c2b:"प्रूफ़ असली न छपने वाला क्षेत्र दिखाता है",c3a:"एजेंट नतीजा नहीं देख पाता",c3b:"प्रूफ़ इमेज और हर समस्या की रिपोर्ट",
+ c4a:"हर बार सेटिंग भूल जाते हैं",c4b:"पूरी ड्राइवर स्थिति वाली नामित प्रोफ़ाइल",tpl:"शामिल टेम्पलेट",g1:"बैज 90×55 · हर A4 पर 10",g2:"विज़िटिंग कार्ड 90×50 · हर A4 पर 10",
+ g3:"इवेंट किट · फ़्लायर + बैज + कार्ड",inst:"इंस्टॉल",any:"कोई भी MCP क्लाइंट",copy:"कॉपी करें",copied:"कॉपी हो गया",
+ req:"uv और Edge या Chrome ज़रूरी है। अभी Windows; आगे macOS और Linux।",foot:"ओपन सोर्स · MIT लाइसेंस"}
+};
+const EN = {};
+document.querySelectorAll("[data-i]").forEach(el => { if (!(el.dataset.i in EN)) EN[el.dataset.i] = el.dataset.html !== undefined ? el.innerHTML : el.textContent; });
+EN.copied = "Copied";
+
+const sel = document.getElementById("lang");
+for (const [code, name] of Object.entries(LANGS)) sel.add(new Option(name, code));
+
+function pick() {
+  const q = new URLSearchParams(location.search).get("lang");
+  if (q && LANGS[q]) return q;
+  try { const s = localStorage.getItem("ps-lang"); if (s && LANGS[s]) return s; } catch (e) {}
+  for (const l of navigator.languages || [navigator.language || "en"]) {
+    if (LANGS[l]) return l;
+    const base = l.split("-")[0];
+    const hit = Object.keys(LANGS).find(k => k.split("-")[0] === base);
+    if (hit) return hit;
+  }
+  return "en";
+}
+let current = "en";
+function apply(code) {
+  current = code;
+  const d = T[code] || {};
+  document.documentElement.lang = code;
+  document.documentElement.dir = code === "ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-i]").forEach(el => {
+    const v = d[el.dataset.i] ?? EN[el.dataset.i];
+    if (el.dataset.html !== undefined) el.innerHTML = v; else el.textContent = v;
+  });
+  sel.value = code;
+}
+sel.addEventListener("change", () => { apply(sel.value); try { localStorage.setItem("ps-lang", sel.value); } catch (e) {} });
+document.querySelectorAll(".copy").forEach(b => b.addEventListener("click", async () => {
+  const t = b.parentElement.querySelector("pre").textContent;
+  try { await navigator.clipboard.writeText(t); } catch (e) {}
+  b.textContent = (T[current] || {}).copied || EN.copied;
+  setTimeout(() => { b.textContent = (T[current] || {}).copy || EN.copy; }, 1500);
+}));
+apply(pick());
+</script>
+</body>
+</html>

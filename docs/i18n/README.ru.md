@@ -1,6 +1,6 @@
 # printshop-mcp
 
-[English](../../README.md) · **Русский** · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português](README.pt-BR.md) · [Deutsch](README.de.md) · [日本語](README.ja.md)
+[English](../../README.md) · **Русский** · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português](README.pt-BR.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Italiano](README.it.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [Українська](README.uk.md) · [العربية](README.ar.md) · [हिन्दी](README.hi.md)
 
 **Типография внутри вашего ИИ-агента.** Попросите: «бейджи для этих 40 гостей, визитки и флаер». Агент сверстает
 их, разложит на листы, покажет точный пробный оттиск и напечатает на **вашем принтере** с точностью до миллиметра.

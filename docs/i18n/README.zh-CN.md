@@ -1,6 +1,6 @@
 # printshop-mcp
 
-[English](../../README.md) · [Русский](README.ru.md) · **简体中文** · [Español](README.es.md) · [Português](README.pt-BR.md) · [Deutsch](README.de.md) · [日本語](README.ja.md)
+[English](../../README.md) · [Русский](README.ru.md) · **简体中文** · [Español](README.es.md) · [Português](README.pt-BR.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Italiano](README.it.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [Українська](README.uk.md) · [العربية](README.ar.md) · [हिन्दी](README.hi.md)
 
 **AI 智能体里的印刷店。** 只需说"给这 40 位来宾做胸牌，再加名片和一张传单"，智能体就会完成设计、拼版、给你看精确的打印样张，
 然后在**你自己的打印机**上以毫米级精度打印出来。它还会**记住你所有的打印配置**：打印机、纸张、纸盒、介质类型、质量、

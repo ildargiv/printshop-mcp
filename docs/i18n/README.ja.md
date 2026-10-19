@@ -1,6 +1,6 @@
 # printshop-mcp
 
-[English](../../README.md) · [Русский](README.ru.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português](README.pt-BR.md) · [Deutsch](README.de.md) · **日本語**
+[English](../../README.md) · [Русский](README.ru.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português](README.pt-BR.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · **日本語** · [한국어](README.ko.md) · [Italiano](README.it.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [Українська](README.uk.md) · [العربية](README.ar.md) · [हिन्दी](README.hi.md)
 
 **AI エージェントの中の印刷所。**「この 40 人分の名札と名刺、チラシを 1 枚」と頼むだけで、エージェントがデザインし、
 用紙に面付けし、正確なプルーフを見せてから、**あなたの実際のプリンター**でミリ単位の精度で印刷します。

@@ -1,6 +1,6 @@
 # printshop-mcp
 
-[English](../../README.md) · [Русский](README.ru.md) · [简体中文](README.zh-CN.md) · **Español** · [Português](README.pt-BR.md) · [Deutsch](README.de.md) · [日本語](README.ja.md)
+[English](../../README.md) · [Русский](README.ru.md) · [简体中文](README.zh-CN.md) · **Español** · [Português](README.pt-BR.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Italiano](README.it.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [Українська](README.uk.md) · [العربية](README.ar.md) · [हिन्दी](README.hi.md)
 
 **La imprenta dentro de tu agente de IA.** Pide "acreditaciones para estos 40 invitados, tarjetas de visita y un
 flyer": el agente las diseña, las monta en hojas, te muestra una prueba exacta y las imprime en **tu impresora real**

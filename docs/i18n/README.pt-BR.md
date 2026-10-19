@@ -1,6 +1,6 @@
 # printshop-mcp
 
-[English](../../README.md) · [Русский](README.ru.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · **Português** · [Deutsch](README.de.md) · [日本語](README.ja.md)
+[English](../../README.md) · [Русский](README.ru.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · **Português** · [Deutsch](README.de.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Italiano](README.it.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [Українська](README.uk.md) · [العربية](README.ar.md) · [हिन्दी](README.hi.md)
 
 **A gráfica dentro do seu agente de IA.** Peça "crachás para estes 40 convidados, cartões de visita e um flyer": o
 agente cria tudo, monta nas folhas, mostra uma prova exata e imprime na **sua impressora de verdade** com precisão

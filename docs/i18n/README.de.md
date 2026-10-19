@@ -1,6 +1,6 @@
 # printshop-mcp
 
-[English](../../README.md) · [Русский](README.ru.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português](README.pt-BR.md) · **Deutsch** · [日本語](README.ja.md)
+[English](../../README.md) · [Русский](README.ru.md) · [简体中文](README.zh-CN.md) · [Español](README.es.md) · [Português](README.pt-BR.md) · **Deutsch** · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Italiano](README.it.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [Українська](README.uk.md) · [العربية](README.ar.md) · [हिन्दी](README.hi.md)
 
 **Die Druckerei in deinem KI-Agenten.** Sag einfach „Namensschilder für diese 40 Gäste, Visitenkarten und einen Flyer“:
 Der Agent gestaltet alles, ordnet es auf Bögen an, zeigt dir einen exakten Probedruck und druckt auf **deinem echten

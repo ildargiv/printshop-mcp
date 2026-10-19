@@ -1,6 +1,8 @@
 # printshop-mcp
 
-**English** · [Русский](docs/i18n/README.ru.md) · [简体中文](docs/i18n/README.zh-CN.md) · [Español](docs/i18n/README.es.md) · [Português](docs/i18n/README.pt-BR.md) · [Deutsch](docs/i18n/README.de.md) · [日本語](docs/i18n/README.ja.md)
+**English** · [Русский](docs/i18n/README.ru.md) · [简体中文](docs/i18n/README.zh-CN.md) · [Español](docs/i18n/README.es.md) · [Português](docs/i18n/README.pt-BR.md) · [Deutsch](docs/i18n/README.de.md) · [Français](docs/i18n/README.fr.md) · [日本語](docs/i18n/README.ja.md) · [한국어](docs/i18n/README.ko.md) · [Italiano](docs/i18n/README.it.md) · [Türkçe](docs/i18n/README.tr.md) · [Polski](docs/i18n/README.pl.md) · [Українська](docs/i18n/README.uk.md) · [العربية](docs/i18n/README.ar.md) · [हिन्दी](docs/i18n/README.hi.md)
+
+🌐 **[ildargiv.github.io/printshop-mcp](https://ildargiv.github.io/printshop-mcp/)**
 
 **The print shop inside your AI agent.** Ask for "badges for these 40 guests, business cards and a flyer" and the
 agent designs them, packs them onto sheets, shows you an exact proof and prints them on **your real printer** -
