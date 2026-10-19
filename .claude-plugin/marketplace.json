@@ -1,0 +1,14 @@
+{
+  "name": "printshop-mcp",
+  "owner": {
+    "name": "ildargiv"
+  },
+  "plugins": [
+    {
+      "name": "printshop",
+      "source": "./",
+      "description": "The print shop inside your agent: design badges, business cards, flyers and mixed sheets as HTML and print them on your real printer with millimetre accuracy. Remembers your print profiles.",
+      "version": "0.1.0"
+    }
+  ]
+}

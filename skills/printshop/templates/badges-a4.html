@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- Event badges 90x55 mm, up to 10 per A4 (2 x 5), crop marks. Add/remove .badge blocks; long names shrink automatically. -->
+<html><head><meta charset="utf-8">
+<style>
+  :root { --brand: #1f4e8c; --accent: #f2a900; --ink: #1b1b1b; --muted: #5d6470;
+          --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+  .grid { position: absolute; left: 15mm; top: 11mm; display: grid; grid-template-columns: 90mm 90mm; grid-auto-rows: 55mm; }
+  .badge { position: relative; overflow: hidden; font-family: var(--font); color: var(--ink); background: #fff; }
+  .badge .top { position: absolute; left: 0; top: 0; right: 0; height: 12mm; background: var(--brand); color: #fff;
+                padding: 0 5mm; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;
+                font-size: 8.5pt; letter-spacing: .02em; }
+  .badge .top b { font-size: 10pt; }
+  .badge .name { position: absolute; left: 5mm; right: 5mm; top: 17mm; height: 13mm; font-size: 24pt; font-weight: 700;
+                 line-height: 13mm; white-space: nowrap; overflow: hidden; }
+  .badge .role { position: absolute; left: 5mm; right: 5mm; top: 31mm; height: 6mm; font-size: 11pt; color: var(--muted);
+                 white-space: nowrap; overflow: hidden; }
+  .badge .org  { position: absolute; left: 5mm; right: 5mm; top: 38mm; height: 6mm; font-size: 10pt; font-weight: 600;
+                 white-space: nowrap; overflow: hidden; }
+  .badge .bar  { position: absolute; left: 0; right: 0; bottom: 0; height: 4mm; background: var(--accent); }
+</style></head><body>
+<section class="ps-sheet" data-name="Badges" style="width:210mm;height:297mm">
+  <div class="grid">
+    <div class="badge" data-cut><div class="top"><b>AI Meetup</b><span>25 Oct 2026</span></div><div class="name" data-fit="11pt">Anna Petrova</div><div class="role" data-fit="7pt">Speaker</div><div class="org" data-fit="7pt">Paper &amp; Co</div><div class="bar"></div></div>
+    <div class="badge" data-cut><div class="top"><b>AI Meetup</b><span>25 Oct 2026</span></div><div class="name" data-fit="11pt">Ilya Smirnov</div><div class="role" data-fit="7pt">Organizer</div><div class="org" data-fit="7pt">AI Meetup</div><div class="bar"></div></div>
+    <div class="badge" data-cut><div class="top"><b>AI Meetup</b><span>25 Oct 2026</span></div><div class="name" data-fit="11pt">Konstantin Konstantinopolsky</div><div class="role" data-fit="7pt">Guest</div><div class="org" data-fit="7pt">Independent</div><div class="bar"></div></div>
+    <div class="badge" data-cut><div class="top"><b>AI Meetup</b><span>25 Oct 2026</span></div><div class="name" data-fit="11pt">Maria Kim</div><div class="role" data-fit="7pt">Guest</div><div class="org" data-fit="7pt">Studio Nine</div><div class="bar"></div></div>
+    <div class="badge" data-cut><div class="top"><b>AI Meetup</b><span>25 Oct 2026</span></div><div class="name" data-fit="11pt">David Chen</div><div class="role" data-fit="7pt">Volunteer</div><div class="org" data-fit="7pt">AI Meetup</div><div class="bar"></div></div>
+    <div class="badge" data-cut><div class="top"><b>AI Meetup</b><span>25 Oct 2026</span></div><div class="name" data-fit="11pt">Sofia Rossi</div><div class="role" data-fit="7pt">Guest</div><div class="org" data-fit="7pt">Rossi &amp; Partners</div><div class="bar"></div></div>
+  </div>
+</section>
+</body></html>

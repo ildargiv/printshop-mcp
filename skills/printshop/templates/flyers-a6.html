@@ -1,0 +1,26 @@
+<!doctype html>
+<!-- Flyers A6 (105x148 mm), 4 per A4. The outer ~3 mm of the sheet is unprintable on most printers,
+     so the design keeps a white frame instead of full-bleed colour. -->
+<html><head><meta charset="utf-8">
+<style>
+  :root { --brand: #3a0ca3; --accent: #f72585; --ink: #111; --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+  .grid { position: absolute; left: 0; top: 0.5mm; display: grid; grid-template-columns: 105mm 105mm; grid-auto-rows: 148mm; }
+  .flyer { position: relative; overflow: hidden; font-family: var(--font); color: var(--ink); background: #fff; }
+  .flyer .panel { position: absolute; left: 6mm; right: 6mm; top: 6mm; height: 70mm; background: var(--brand); color: #fff;
+                  padding: 7mm 6mm; box-sizing: border-box; }
+  .flyer .kicker { font-size: 9pt; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .flyer h1 { margin: 3mm 0 0; font-size: 26pt; line-height: 1.05; height: 40mm; overflow: hidden; }
+  .flyer .when { position: absolute; left: 6mm; right: 6mm; top: 82mm; font-size: 13pt; font-weight: 700; }
+  .flyer .what { position: absolute; left: 6mm; right: 6mm; top: 92mm; height: 30mm; font-size: 9.5pt; line-height: 1.4; overflow: hidden; }
+  .flyer .cta { position: absolute; left: 6mm; right: 6mm; bottom: 8mm; height: 10mm; background: var(--accent); color: #fff;
+                font-weight: 700; font-size: 10.5pt; display: flex; align-items: center; justify-content: center; }
+</style></head><body>
+<section class="ps-sheet" data-name="Flyers A6" style="width:210mm;height:297mm">
+  <div class="grid">
+    <div class="flyer" data-cut><div class="panel"><div class="kicker">Free meetup</div><h1 data-fit="16pt">Agents that print things</h1></div><div class="when">Sat 25 Oct · 18:00</div><div class="what">Live demo: an AI agent designs badges, business cards and flyers, then prints them on a real printer. Bring your laptop.</div><div class="cta">Register: example.com/meetup</div></div>
+    <div class="flyer" data-cut><div class="panel"><div class="kicker">Free meetup</div><h1 data-fit="16pt">Agents that print things</h1></div><div class="when">Sat 25 Oct · 18:00</div><div class="what">Live demo: an AI agent designs badges, business cards and flyers, then prints them on a real printer. Bring your laptop.</div><div class="cta">Register: example.com/meetup</div></div>
+    <div class="flyer" data-cut><div class="panel"><div class="kicker">Free meetup</div><h1 data-fit="16pt">Agents that print things</h1></div><div class="when">Sat 25 Oct · 18:00</div><div class="what">Live demo: an AI agent designs badges, business cards and flyers, then prints them on a real printer. Bring your laptop.</div><div class="cta">Register: example.com/meetup</div></div>
+    <div class="flyer" data-cut><div class="panel"><div class="kicker">Free meetup</div><h1 data-fit="16pt">Agents that print things</h1></div><div class="when">Sat 25 Oct · 18:00</div><div class="what">Live demo: an AI agent designs badges, business cards and flyers, then prints them on a real printer. Bring your laptop.</div><div class="cta">Register: example.com/meetup</div></div>
+  </div>
+</section>
+</body></html>

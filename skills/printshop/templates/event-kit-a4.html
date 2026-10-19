@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- Mixed sheet: 1 flyer A6 + 3 badges 90x55 + 4 business cards 90x50 on one A4, packed edge to edge in two columns.
+     Items that touch share one cut line; crop marks are drawn only where they do not land on a neighbour. -->
+<html><head><meta charset="utf-8">
+<style>
+  :root { --brand: #1f4e8c; --accent: #f2a900; --ink: #1b1b1b; --muted: #5d6470;
+          --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+  .item { position: absolute; overflow: hidden; background: #fff; font-family: var(--font); color: var(--ink); }
+
+  .flyer { width: 105mm; height: 148mm; }
+  .flyer .panel { position: absolute; left: 6mm; right: 6mm; top: 6mm; height: 66mm; background: var(--brand); color: #fff; padding: 7mm 6mm; box-sizing: border-box; }
+  .flyer .kicker { font-size: 9pt; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .flyer h1 { margin: 3mm 0 0; font-size: 25pt; line-height: 1.05; height: 38mm; overflow: hidden; }
+  .flyer .when { position: absolute; left: 6mm; right: 6mm; top: 78mm; font-size: 13pt; font-weight: 700; }
+  .flyer .what { position: absolute; left: 6mm; right: 6mm; top: 88mm; height: 32mm; font-size: 9.5pt; line-height: 1.4; overflow: hidden; }
+  .flyer .cta { position: absolute; left: 6mm; right: 6mm; bottom: 7mm; height: 10mm; background: var(--accent); color: #fff; font-weight: 700; font-size: 10.5pt; display: flex; align-items: center; justify-content: center; }
+
+  .badge { width: 90mm; height: 55mm; }
+  .badge .top { position: absolute; left: 0; top: 0; right: 0; height: 12mm; background: var(--brand); color: #fff; padding: 0 5mm; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; font-size: 8.5pt; }
+  .badge .name { position: absolute; left: 5mm; right: 5mm; top: 17mm; height: 13mm; font-size: 24pt; font-weight: 700; line-height: 13mm; white-space: nowrap; overflow: hidden; }
+  .badge .role { position: absolute; left: 5mm; right: 5mm; top: 32mm; font-size: 11pt; color: var(--muted); }
+  .badge .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 4mm; background: var(--accent); }
+
+  .card { width: 90mm; height: 50mm; }
+  .card .side { position: absolute; left: 0; top: 0; bottom: 0; width: 6mm; background: var(--brand); }
+  .card .name { position: absolute; left: 11mm; right: 5mm; top: 12mm; height: 8mm; font-size: 15pt; font-weight: 700; line-height: 8mm; white-space: nowrap; overflow: hidden; }
+  .card .title { position: absolute; left: 11mm; right: 5mm; top: 20.5mm; font-size: 9pt; color: var(--accent); font-weight: 600; }
+  .card .contacts { position: absolute; left: 11mm; right: 5mm; bottom: 5mm; font-size: 8pt; line-height: 4.2mm; color: var(--muted); }
+</style></head><body>
+<section class="ps-sheet" data-name="Event kit" style="width:210mm;height:297mm">
+  <!-- left column: x 10-115 -->
+  <div class="item flyer" data-cut style="left:10mm;top:10mm"><div class="panel"><div class="kicker">Free meetup</div><h1 data-fit="16pt">Agents that print things</h1></div><div class="when">Sat 25 Oct · 18:00</div><div class="what">Live demo: an AI agent designs badges, business cards and flyers, then prints them on a real printer.</div><div class="cta">example.com/meetup</div></div>
+  <div class="item card" data-cut style="left:10mm;top:163mm"><div class="side"></div><div class="name" data-fit="10pt">Anna Petrova</div><div class="title">Speaker · AI Meetup</div><div class="contacts">anna@example.com<br>example.com</div></div>
+  <div class="item card" data-cut style="left:10mm;top:213mm"><div class="side"></div><div class="name" data-fit="10pt">Anna Petrova</div><div class="title">Speaker · AI Meetup</div><div class="contacts">anna@example.com<br>example.com</div></div>
+  <!-- right column: x 115-205 -->
+  <div class="item badge" data-cut style="left:115mm;top:10mm"><div class="top"><b>AI Meetup</b><span>25 Oct</span></div><div class="name" data-fit="11pt">Anna Petrova</div><div class="role">Speaker</div><div class="bar"></div></div>
+  <div class="item badge" data-cut style="left:115mm;top:65mm"><div class="top"><b>AI Meetup</b><span>25 Oct</span></div><div class="name" data-fit="11pt">Ilya Smirnov</div><div class="role">Organizer</div><div class="bar"></div></div>
+  <div class="item badge" data-cut style="left:115mm;top:120mm"><div class="top"><b>AI Meetup</b><span>25 Oct</span></div><div class="name" data-fit="11pt">Konstantin Konstantinopolsky</div><div class="role">Guest</div><div class="bar"></div></div>
+  <div class="item card" data-cut style="left:115mm;top:175mm"><div class="side"></div><div class="name" data-fit="10pt">Ilya Smirnov</div><div class="title">Organizer · AI Meetup</div><div class="contacts">ilya@example.com<br>example.com</div></div>
+  <div class="item card" data-cut style="left:115mm;top:225mm"><div class="side"></div><div class="name" data-fit="10pt">Ilya Smirnov</div><div class="title">Organizer · AI Meetup</div><div class="contacts">ilya@example.com<br>example.com</div></div>
+</section>
+</body></html>

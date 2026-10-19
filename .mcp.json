@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "printshop": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/ildargiv/printshop-mcp",
+        "printshop-mcp"
+      ]
+    }
+  }
+}

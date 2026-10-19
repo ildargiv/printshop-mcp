@@ -1,0 +1,21 @@
+<!doctype html>
+<!-- Folded table tent (name card) on landscape A4. Fold along the dashed line; the top half is upside down so both
+     sides read correctly when it stands. One tent per sheet: add a .ps-sheet section per name. -->
+<html><head><meta charset="utf-8">
+<style>
+  :root { --brand: #1f4e8c; --accent: #f2a900; --ink: #111; --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+  .half { position: absolute; left: 10mm; width: 277mm; height: 95mm; font-family: var(--font); color: var(--ink);
+          display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .half.top { top: 6mm; transform: rotate(180deg); }
+  .half.bottom { top: 109mm; }
+  .half .name { width: 250mm; height: 30mm; font-size: 54pt; font-weight: 800; line-height: 30mm; white-space: nowrap; overflow: hidden; }
+  .half .role { margin-top: 3mm; font-size: 18pt; color: var(--brand); }
+  .half .stripe { position: absolute; bottom: 0; left: 60mm; right: 60mm; height: 2.5mm; background: var(--accent); }
+  .fold { position: absolute; left: 5mm; right: 5mm; top: 104.75mm; border-top: 0.2mm dashed #999; }
+</style></head><body>
+<section class="ps-sheet" data-name="Table tent" style="width:297mm;height:210mm">
+  <div class="half top"><div class="name" data-fit="24pt">Anna Petrova</div><div class="role">Speaker · AI Meetup</div><div class="stripe"></div></div>
+  <div class="fold"></div>
+  <div class="half bottom"><div class="name" data-fit="24pt">Anna Petrova</div><div class="role">Speaker · AI Meetup</div><div class="stripe"></div></div>
+</section>
+</body></html>
