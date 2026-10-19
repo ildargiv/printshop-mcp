@@ -1,6 +1,6 @@
 [project]
 name = "printshop-mcp"
-version = "0.2.0"
+version = "0.2.1"
 description = "The print shop inside your AI agent: millimetre-accurate printing from HTML, with remembered print profiles."
 readme = "README.md"
 requires-python = ">=3.10"
