@@ -13,7 +13,7 @@
 
 ## 対応プリンター
 
-**紙に印刷するプリンター用です：インクジェット、レーザー、フォト、昇華型、ラベルプリンター。3D プリンター用ではありません。**
+**紙に印刷するプリンター用です：インクジェット、レーザー、フォト、昇華転写（グッズ印刷）、ラベルプリンター。3D プリンター用ではありません。**
 
 Windows ドライバーがあるプリンターなら、メーカーを問わず使えます。印刷は Windows 標準の印刷システムを通り、メーカー独自の設定（用紙の種類、フチなし、印刷品質）はドライバー自身の設定画面からプロファイルに保存されます。
 
@@ -21,8 +21,8 @@ Windows ドライバーがあるプリンターなら、メーカーを問わず
 |---|---|
 | インクジェット | Epson · Canon · HP · Brother |
 | レーザー・複合機 | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
-| フォト（インクジェット） | Epson · Canon · HP |
-| 昇華型（フォト） | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| フォト（インクジェット・昇華型フォト） | Epson · Canon · HP · DNP · Mitsubishi · Citizen · Canon Selphy |
+| 昇華転写（グッズ：マグカップ、Tシャツ、パズル） | Epson EcoTank / SureColor F (昇華インク使用) · Sawgrass · Ricoh |
 | ラベル / サーマル | Zebra · TSC · Brother QL · Dymo · Xprinter |
 
 現在までの検証:

@@ -120,7 +120,7 @@ async def save_profile(name: str, printer: str | None = None, paper: str | None 
                        dpi: int | None = None, scale_x: float | None = None, scale_y: float | None = None,
                        offset_x_mm: float | None = None, offset_y_mm: float | None = None,
                        tags: list[str] | None = None, notes: str | None = None,
-                       open_driver_dialog: bool = False, make_default: bool = False) -> str:
+                       mirror: bool | None = None, open_driver_dialog: bool = False, make_default: bool = False) -> str:
     """Create or update a remembered print profile. Only the given fields change.
 
     paper: "sheet" (paper size follows the HTML sheet, default) or "driver" (keep the paper set in the driver).
@@ -128,6 +128,7 @@ async def save_profile(name: str, printer: str | None = None, paper: str | None 
     color: color|mono. duplex: simplex|long_edge|short_edge. icc: path to a printer ICC profile, intent:
     perceptual|relative|saturation|absolute. dpi: render resolution (default 300).
     scale_x/scale_y (0.97-1.03) and offset_x_mm/offset_y_mm (-5..5): calibration applied to every job.
+    mirror: print every sheet mirrored (sublimation / heat-transfer paper for mugs, T-shirts). Proofs stay readable.
     tags/notes: what this profile is for ("business cards", "cardstock 300g") so it can be found later.
     open_driver_dialog: shows the printer driver's own settings window to the user; everything they choose there,
     including vendor-only options, is stored in the profile.
@@ -157,7 +158,7 @@ async def save_profile(name: str, printer: str | None = None, paper: str | None 
                        media=_pick(caps["media_types"], media, "media") if media else None,
                        quality=quality, color=color, duplex=duplex, icc=icc, intent=intent, dpi=dpi,
                        scale_x=scale_x, scale_y=scale_y, offset_x_mm=offset_x_mm, offset_y_mm=offset_y_mm,
-                       tags=tags, notes=notes)
+                       mirror=mirror, tags=tags, notes=notes)
         if make_default:
             store.set_default(name)
         q = public(p)

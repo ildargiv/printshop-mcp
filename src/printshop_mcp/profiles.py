@@ -26,7 +26,7 @@ def data_dir():
 
 
 FIELDS = ("printer", "paper", "tray", "media", "quality", "color", "duplex", "icc", "intent", "dpi",
-          "scale_x", "scale_y", "offset_x_mm", "offset_y_mm", "tags", "notes")
+          "scale_x", "scale_y", "offset_x_mm", "offset_y_mm", "mirror", "tags", "notes")
 CAL_LIMITS = {"scale_x": (0.97, 1.03), "scale_y": (0.97, 1.03), "offset_x_mm": (-5, 5), "offset_y_mm": (-5, 5)}
 
 

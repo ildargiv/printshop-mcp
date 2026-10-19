@@ -17,8 +17,8 @@ body:
       options:
         - Inkjet
         - Laser / MFP
-        - Photo (inkjet)
-        - Dye-sublimation (photo)
+        - Photo (inkjet or dye-sub photo)
+        - Sublimation (souvenir transfer: mugs, T-shirts)
         - Label / thermal
         - Other
     validations:

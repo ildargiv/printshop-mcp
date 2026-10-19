@@ -13,7 +13,7 @@ calidad, perfil de color, calibración e incluso opciones propias del fabricante
 
 ## Compatibilidad con impresoras
 
-**Para impresoras de papel: de inyección de tinta, láser, fotográficas, de sublimación y de etiquetas. No para impresoras 3D.**
+**Para impresoras de papel: de inyección de tinta, láser, fotográficas, de sublimación (souvenirs) y de etiquetas. No para impresoras 3D.**
 
 Funciona con cualquier impresora que tenga controlador de Windows, sea cual sea la marca: la impresión pasa por el sistema de impresión estándar de Windows y las opciones propias del fabricante (tipo de papel, sin bordes, calidad) se guardan en perfiles mediante la ventana de ajustes del propio controlador.
 
@@ -21,8 +21,8 @@ Funciona con cualquier impresora que tenga controlador de Windows, sea cual sea 
 |---|---|
 | Inyección de tinta | Epson · Canon · HP · Brother |
 | Láser y multifunción | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
-| Fotográficas (inyección) | Epson · Canon · HP |
-| Sublimación (foto) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Fotográficas (inyección y sublimación fotográfica) | Epson · Canon · HP · DNP · Mitsubishi · Citizen · Canon Selphy |
+| Sublimación (souvenirs: tazas, camisetas, puzles) | Epson EcoTank / SureColor F (con tinta de sublimación) · Sawgrass · Ricoh |
 | Etiquetas / térmicas | Zebra · TSC · Brother QL · Dymo · Xprinter |
 
 Verificado hasta ahora:

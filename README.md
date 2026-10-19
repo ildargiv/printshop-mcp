@@ -19,7 +19,7 @@ long names shrunk to fit, grey border = what your printer can't print.*
 
 ## Printer compatibility
 
-**For paper printers: inkjet, laser, photo, dye-sublimation and label printers. Not for 3D printers.**
+**For paper printers: inkjet, laser, photo, sublimation (souvenir transfer printing) and label printers. Not for 3D printers.**
 
 Works with any printer that has a Windows driver, whatever the brand: printing goes through the standard Windows print system, and vendor-only options (paper types, borderless, print quality) are kept in profiles through the driver's own settings window.
 
@@ -27,8 +27,8 @@ Works with any printer that has a Windows driver, whatever the brand: printing g
 |---|---|
 | Inkjet | Epson · Canon · HP · Brother |
 | Laser and MFP | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
-| Photo (inkjet) | Epson · Canon · HP |
-| Dye-sublimation (photo) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Photo (inkjet and dye-sub photo) | Epson · Canon · HP · DNP · Mitsubishi · Citizen · Canon Selphy |
+| Sublimation (souvenirs: mugs, T-shirts, puzzles) | Epson EcoTank / SureColor F (with sublimation ink) · Sawgrass · Ricoh |
 | Label / thermal | Zebra · TSC · Brother QL · Dymo · Xprinter |
 
 Verified so far:
@@ -80,13 +80,14 @@ a layout reference (what fits on A4/Letter) and templates:
 | `flyers-a6.html` | A6 flyers, 4 per A4 |
 | `table-tent-a4.html` | Folded table tent / name card |
 | `event-kit-a4.html` | Mixed: flyer + badges + business cards on one sheet |
+| `mug-wrap-a4.html` | Sublimation mug wraps 200x95 (11 oz), printed mirrored |
 
 **MCP tools:**
 
 | Tool | |
 |---|---|
 | `list_printers`, `describe_printer` | Printers, papers, trays, media types, printable area, saved profiles |
-| `list_profiles`, `save_profile`, `set_default_profile`, `delete_profile` | Remembered print setups; `open_driver_dialog=true` lets you set vendor options once in the driver window |
+| `list_profiles`, `save_profile`, `set_default_profile`, `delete_profile` | Remembered print setups; `open_driver_dialog=true` lets you set vendor options once in the driver window; `mirror=true` for sublimation transfer paper |
 | `layout` | Pack many items (HTML designs, PDFs, images) onto sheets, grouped by paper, with crop marks |
 | `proof` | Render + preflight an HTML file or **any PDF**: proof images and a job id |
 | `print_job` | Print a proofed job (warnings need explicit confirmation) |

@@ -13,7 +13,7 @@
 
 ## 프린터 호환성
 
-**종이 프린터용입니다: 잉크젯, 레이저, 포토, 승화형, 라벨 프린터. 3D 프린터용이 아닙니다.**
+**종이 프린터용입니다: 잉크젯, 레이저, 포토, 승화 전사(기념품 인쇄), 라벨 프린터. 3D 프린터용이 아닙니다.**
 
 Windows 드라이버가 있는 프린터라면 브랜드와 관계없이 작동합니다. 인쇄는 Windows 표준 인쇄 시스템을 거치며, 제조사 전용 옵션(용지 종류, 무테 인쇄, 품질)은 드라이버 자체 설정 창을 통해 프로필에 저장됩니다.
 
@@ -21,8 +21,8 @@ Windows 드라이버가 있는 프린터라면 브랜드와 관계없이 작동�
 |---|---|
 | 잉크젯 | Epson · Canon · HP · Brother |
 | 레이저 및 복합기 | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
-| 포토 (잉크젯) | Epson · Canon · HP |
-| 승화형 (포토) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| 포토 (잉크젯 및 승화형 포토) | Epson · Canon · HP · DNP · Mitsubishi · Citizen · Canon Selphy |
+| 승화 전사 (기념품: 머그컵, 티셔츠, 퍼즐) | Epson EcoTank / SureColor F (승화 잉크 사용) · Sawgrass · Ricoh |
 | 라벨 / 감열 | Zebra · TSC · Brother QL · Dymo · Xprinter |
 
 지금까지 검증된 항목:

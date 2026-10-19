@@ -36,8 +36,22 @@ def test_profile_and_print_to_pdf():
         assert e.code == "already_printed"
 
 
+def test_mirror_for_sublimation():
+    import pypdfium2 as pdfium
+    home = Path(os.environ["PRINTSHOP_HOME"])
+    (home / "m.html").write_text('<section class="ps-sheet" style="width:210mm;height:297mm"><div style="position:absolute;'
+                                 'left:10mm;top:10mm;width:40mm;height:40mm;background:#000"></div></section>', "utf-8")
+    ProfileStore().save("transfer", devmode=win.default_devmode(PDF), printer=PDF, mirror=True)
+    job = jobs.preflight(path=str(home / "m.html"), profile="transfer")
+    jobs.print_job(job["job_id"], output=str(home / "m.pdf"))
+    img = pdfium.PdfDocument(str(home / "m.pdf"))[0].render(scale=1).to_pil().convert("L")
+    W, H = img.size
+    assert img.getpixel((int(W * .14), int(H * .1))) > 200 and img.getpixel((int(W * .86), int(H * .1))) < 50
+
+
 if __name__ == "__main__":
     if sys.platform != "win32":
         sys.exit("Windows only")
     test_profile_and_print_to_pdf()
+    test_mirror_for_sublimation()
     print("ok")

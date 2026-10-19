@@ -29,6 +29,7 @@ the server (see "Setup" at the end) instead of improvising with the OS print dia
    | `flyers-a6.html` | A6 flyers, 4 per A4 |
    | `table-tent-a4.html` | Folded table tent / name card, landscape A4 |
    | `event-kit-a4.html` | Mixed sheet: flyer + badges + business cards together |
+   | `mug-wrap-a4.html` | Sublimation mug wraps 200x95 (11 oz), 3 per A4 |
    Copy the template into the user's working folder, then edit text, colours (`:root` variables) and item count.
    **Many items or a mix (a badge per guest, cards, flyers)? Use the `layout` tool instead of placing them by
    hand:** give one item per distinct design (`html` filling the box, or `src` = PDF/image) with `width_mm`,
@@ -77,6 +78,15 @@ Use `layout`. Give items that need different paper different `group`s (cards on 
 "glossy"): each group becomes its own file, proofed and printed with its own profile. Report the plan before
 printing, using the numbers `layout` returns: "3 sheets: 1 cardstock (10 cards), 2 plain (12 badges + 4 flyers)".
 `event-kit-a4.html` shows a hand-made mixed sheet for when you need full control.
+
+## Sublimation (souvenirs: mugs, T-shirts, puzzles)
+
+Sublimation printers (Epson EcoTank / SureColor F with sublimation ink, Sawgrass, Ricoh) print onto transfer paper
+that is then heat-pressed onto the product, so the print must be **mirrored**. Use a profile with `mirror=true`
+(create it with `save_profile`, tags like "sublimation", "mug"); design the HTML readable, the mirroring happens at
+print time and the proof says "MIRRORED ON PRINT". Ask for the ink vendor's ICC profile and store it in `icc`.
+Mug 11 oz print area is about 200x95 mm (15 oz: about 230x95): keep text 8 mm from the ends (handle) and 5 mm from
+the top/bottom. Colours print duller on transfer paper and get vivid after pressing - do not "fix" that.
 
 ## Safety
 

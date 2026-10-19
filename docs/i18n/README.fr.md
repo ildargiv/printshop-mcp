@@ -13,7 +13,7 @@ support, qualité, profil couleur, calibrage, et même les options propres au fa
 
 ## Compatibilité des imprimantes
 
-**Pour les imprimantes papier : jet d’encre, laser, photo, sublimation thermique et étiquettes. Pas pour les imprimantes 3D.**
+**Pour les imprimantes papier : jet d’encre, laser, photo, sublimation (objets personnalisés) et étiquettes. Pas pour les imprimantes 3D.**
 
 Fonctionne avec toute imprimante disposant d’un pilote Windows, quelle que soit la marque : l’impression passe par le système d’impression standard de Windows, et les options propres au fabricant (type de papier, sans marge, qualité) sont enregistrées dans les profils via la fenêtre de réglages du pilote.
 
@@ -21,8 +21,8 @@ Fonctionne avec toute imprimante disposant d’un pilote Windows, quelle que soi
 |---|---|
 | Jet d’encre | Epson · Canon · HP · Brother |
 | Laser et multifonction | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
-| Photo (jet d’encre) | Epson · Canon · HP |
-| Sublimation thermique (photo) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Photo (jet d’encre et sublimation photo) | Epson · Canon · HP · DNP · Mitsubishi · Citizen · Canon Selphy |
+| Sublimation (objets personnalisés : mugs, t-shirts, puzzles) | Epson EcoTank / SureColor F (avec encre de sublimation) · Sawgrass · Ricoh |
 | Étiquettes / thermique | Zebra · TSC · Brother QL · Dymo · Xprinter |
 
 Vérifié à ce jour:

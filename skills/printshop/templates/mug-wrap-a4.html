@@ -1,0 +1,24 @@
+<!doctype html>
+<!-- Sublimation mug wraps for 11 oz mugs: 200x95 mm print area, 3 per A4, crop marks.
+     Design it readable here; print with a profile that has mirror=true (sublimation ink + transfer paper).
+     Keep text 8 mm away from the left/right ends (the handle side) and 5 mm from the top/bottom edges. -->
+<html><head><meta charset="utf-8">
+<style>
+  :root { --brand: #e63946; --accent: #1d3557; --ink: #1d3557; --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+  .grid { position: absolute; left: 5mm; top: 6mm; display: grid; grid-template-columns: 200mm; grid-auto-rows: 95mm; }
+  .wrap { position: relative; overflow: hidden; font-family: var(--font); color: var(--ink);
+          background: linear-gradient(90deg, #fff1e6 0%, #ffd6d9 50%, #fff1e6 100%); }
+  .wrap .name { position: absolute; left: 8mm; right: 8mm; top: 24mm; height: 24mm; text-align: center; font-size: 46pt;
+                font-weight: 800; line-height: 24mm; white-space: nowrap; overflow: hidden; color: var(--brand); }
+  .wrap .line { position: absolute; left: 8mm; right: 8mm; top: 52mm; text-align: center; font-size: 15pt; letter-spacing: .08em; }
+  .wrap .dots { position: absolute; left: 8mm; right: 8mm; bottom: 9mm; height: 4mm;
+                background: radial-gradient(circle, var(--accent) 1.2mm, transparent 1.3mm) 0 0 / 8mm 4mm repeat-x; }
+</style></head><body>
+<section class="ps-sheet" data-name="Mug wraps 11oz" style="width:210mm;height:297mm">
+  <div class="grid">
+    <div class="wrap" data-cut><div class="name" data-fit="20pt">Anna</div><div class="line">BEST TEACHER · 2026</div><div class="dots"></div></div>
+    <div class="wrap" data-cut><div class="name" data-fit="20pt">Konstantin</div><div class="line">COFFEE FIRST</div><div class="dots"></div></div>
+    <div class="wrap" data-cut><div class="name" data-fit="20pt">Maria</div><div class="line">HAPPY BIRTHDAY</div><div class="dots"></div></div>
+  </div>
+</section>
+</body></html>

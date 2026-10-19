@@ -12,7 +12,7 @@
 
 ## 打印机兼容性
 
-**适用于纸张打印机：喷墨、激光、照片、热升华和标签打印机。不适用于 3D 打印机。**
+**适用于纸张打印机：喷墨、激光、照片、热转印升华（纪念品印刷）和标签打印机。不适用于 3D 打印机。**
 
 适用于任何装有 Windows 驱动程序的打印机，不限品牌：打印通过 Windows 标准打印系统完成，厂商专有选项（纸张类型、无边距、打印质量）通过驱动自身的设置窗口保存在配置中。
 
@@ -20,8 +20,8 @@
 |---|---|
 | 喷墨 | Epson · Canon · HP · Brother |
 | 激光及多功能一体机 | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
-| 照片（喷墨） | Epson · Canon · HP |
-| 热升华（照片） | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| 照片（喷墨及热升华照片机） | Epson · Canon · HP · DNP · Mitsubishi · Citizen · Canon Selphy |
+| 热转印升华（纪念品：马克杯、T 恤、拼图） | Epson EcoTank / SureColor F (使用升华墨水) · Sawgrass · Ricoh |
 | 标签 / 热敏 | Zebra · TSC · Brother QL · Dymo · Xprinter |
 
 目前已验证:

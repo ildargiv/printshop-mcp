@@ -13,7 +13,7 @@ profili, kalibrasyon, hatta üreticiye özel sürücü seçenekleri. Bir kez anl
 
 ## Yazıcı uyumluluğu
 
-**Kâğıt yazıcıları içindir: mürekkep püskürtmeli, lazer, fotoğraf, süblimasyon ve etiket yazıcıları. 3D yazıcılar için değildir.**
+**Kâğıt yazıcıları içindir: mürekkep püskürtmeli, lazer, fotoğraf, süblimasyon (hediyelik baskı) ve etiket yazıcıları. 3D yazıcılar için değildir.**
 
 Markası ne olursa olsun Windows sürücüsü olan her yazıcıyla çalışır: baskı Windows’un standart yazdırma sisteminden geçer, üreticiye özel seçenekler (kâğıt türü, kenarlıksız, kalite) sürücünün kendi ayar penceresiyle profillere kaydedilir.
 
@@ -21,8 +21,8 @@ Markası ne olursa olsun Windows sürücüsü olan her yazıcıyla çalışır: 
 |---|---|
 | Mürekkep püskürtmeli | Epson · Canon · HP · Brother |
 | Lazer ve çok fonksiyonlu | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
-| Fotoğraf (mürekkep püskürtmeli) | Epson · Canon · HP |
-| Süblimasyon (fotoğraf) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Fotoğraf (mürekkep püskürtmeli ve termal süblimasyon) | Epson · Canon · HP · DNP · Mitsubishi · Citizen · Canon Selphy |
+| Süblimasyon (hediyelik: kupa, tişört, yapboz) | Epson EcoTank / SureColor F (süblimasyon mürekkebiyle) · Sawgrass · Ricoh |
 | Etiket / termal | Zebra · TSC · Brother QL · Dymo · Xprinter |
 
 Şu ana kadar doğrulananlar:

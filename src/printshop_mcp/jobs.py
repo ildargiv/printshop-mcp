@@ -167,6 +167,8 @@ def preflight(html=None, path=None, printer=None, profile=None, copies=1, dpi=No
 
         img.save(jdir / f"sheet-{n}.png")
         label = f"sheet {n}/{len(images)}  {w}x{h} mm  {printer}" + (f"  [{prof['name']}]" if prof else "")
+        if prof and prof.get("mirror"):
+            label += "  MIRRORED ON PRINT"
         pv = _proof_image(img, sh, geom, issues, dpi, label)
         pv.save(jdir / f"proof-{n}.png")
         proofs.append(str(jdir / f"proof-{n}.png"))
@@ -253,7 +255,10 @@ def print_job(job_id, accept_warnings=False, output=None):
         with win.PrinterJob(printer, blobs[key], f"printshop {job_id}", output=out) as pj:
             for sh in group:
                 img = Image.open(jdir / f"sheet-{sh['sheet']}.png").convert("RGB")
-                pj.page(_calibrate(_color(img, prof), prof, dpi))
+                img = _color(img, prof)
+                if prof.get("mirror"):                 # sublimation / transfer paper is printed mirrored
+                    img = ImageOps.mirror(img)
+                pj.page(_calibrate(img, prof, dpi))
                 sent += 1
             pj.finish()
     job["printed"] = time.time()

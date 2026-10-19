@@ -13,7 +13,7 @@ nośnika, jakość, profil kolorów, kalibrację, a nawet opcje sterownika produ
 
 ## Zgodność z drukarkami
 
-**Do drukarek papierowych: atramentowych, laserowych, fotograficznych, termosublimacyjnych i etykiet. Nie do drukarek 3D.**
+**Do drukarek papierowych: atramentowych, laserowych, fotograficznych, sublimacyjnych (gadżety) i etykiet. Nie do drukarek 3D.**
 
 Działa z każdą drukarką, która ma sterownik Windows, niezależnie od marki: druk przechodzi przez standardowy system drukowania Windows, a opcje producenta (rodzaj papieru, bez marginesów, jakość) zapisują się w profilach przez okno ustawień samego sterownika.
 
@@ -21,8 +21,8 @@ Działa z każdą drukarką, która ma sterownik Windows, niezależnie od marki:
 |---|---|
 | Atramentowe | Epson · Canon · HP · Brother |
 | Laserowe i wielofunkcyjne | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
-| Fotograficzne (atramentowe) | Epson · Canon · HP |
-| Termosublimacyjne (foto) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Fotograficzne (atramentowe i termosublimacyjne) | Epson · Canon · HP · DNP · Mitsubishi · Citizen · Canon Selphy |
+| Sublimacja (gadżety: kubki, koszulki, puzzle) | Epson EcoTank / SureColor F (z tuszem sublimacyjnym) · Sawgrass · Ricoh |
 | Etykiet / termiczne | Zebra · TSC · Brother QL · Dymo · Xprinter |
 
 Sprawdzone do tej pory:

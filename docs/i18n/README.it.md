@@ -13,7 +13,7 @@ qualità, profilo colore, calibrazione e perfino le opzioni proprietarie del dri
 
 ## Compatibilità con le stampanti
 
-**Per stampanti su carta: a getto d’inchiostro, laser, fotografiche, a sublimazione e per etichette. Non per stampanti 3D.**
+**Per stampanti su carta: a getto d’inchiostro, laser, fotografiche, a sublimazione (gadget) e per etichette. Non per stampanti 3D.**
 
 Funziona con qualsiasi stampante dotata di driver Windows, di qualunque marca: la stampa passa dal sistema di stampa standard di Windows e le opzioni proprietarie (tipo di carta, senza bordi, qualità) vengono salvate nei profili tramite la finestra di impostazioni del driver.
 
@@ -21,8 +21,8 @@ Funziona con qualsiasi stampante dotata di driver Windows, di qualunque marca: l
 |---|---|
 | Getto d’inchiostro | Epson · Canon · HP · Brother |
 | Laser e multifunzione | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
-| Fotografiche (getto d’inchiostro) | Epson · Canon · HP |
-| Sublimazione (foto) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Fotografiche (getto d’inchiostro e sublimazione foto) | Epson · Canon · HP · DNP · Mitsubishi · Citizen · Canon Selphy |
+| Sublimazione (gadget: tazze, magliette, puzzle) | Epson EcoTank / SureColor F (con inchiostro a sublimazione) · Sawgrass · Ricoh |
 | Etichette / termiche | Zebra · TSC · Brother QL · Dymo · Xprinter |
 
 Verificato finora:

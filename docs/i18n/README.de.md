@@ -13,7 +13,7 @@ Farbprofil, Kalibrierung, sogar herstellerspezifische Treiberoptionen. Einmal er
 
 ## Druckerkompatibilität
 
-**Für Papierdrucker: Tintenstrahl-, Laser-, Foto-, Thermosublimations- und Etikettendrucker. Nicht für 3D-Drucker.**
+**Für Papierdrucker: Tintenstrahl-, Laser-, Foto-, Sublimations- (Souvenirdruck) und Etikettendrucker. Nicht für 3D-Drucker.**
 
 Funktioniert mit jedem Drucker, für den es einen Windows-Treiber gibt, egal welche Marke: Gedruckt wird über das Standard-Drucksystem von Windows, und herstellerspezifische Optionen (Papiertyp, randlos, Qualität) werden über das Einstellungsfenster des Treibers in Profilen gespeichert.
 
@@ -21,8 +21,8 @@ Funktioniert mit jedem Drucker, für den es einen Windows-Treiber gibt, egal wel
 |---|---|
 | Tintenstrahl | Epson · Canon · HP · Brother |
 | Laser und Multifunktion | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
-| Foto (Tintenstrahl) | Epson · Canon · HP |
-| Thermosublimation (Foto) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Foto (Tintenstrahl und Thermosublimation) | Epson · Canon · HP · DNP · Mitsubishi · Citizen · Canon Selphy |
+| Sublimation (Souvenirs: Tassen, T-Shirts, Puzzles) | Epson EcoTank / SureColor F (mit Sublimationstinte) · Sawgrass · Ricoh |
 | Etiketten / Thermo | Zebra · TSC · Brother QL · Dymo · Xprinter |
 
 Bisher geprüft:

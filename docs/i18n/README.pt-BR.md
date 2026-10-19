@@ -13,7 +13,7 @@ perfil de cor, calibração e até opções exclusivas do fabricante. Explique u
 
 ## Compatibilidade com impressoras
 
-**Para impressoras de papel: jato de tinta, laser, fotográficas, de sublimação e de etiquetas. Não para impressoras 3D.**
+**Para impressoras de papel: jato de tinta, laser, fotográficas, de sublimação (brindes) e de etiquetas. Não para impressoras 3D.**
 
 Funciona com qualquer impressora que tenha driver do Windows, de qualquer marca: a impressão passa pelo sistema de impressão padrão do Windows, e as opções exclusivas do fabricante (tipo de papel, sem margens, qualidade) ficam salvas nos perfis pela própria janela de configurações do driver.
 
@@ -21,8 +21,8 @@ Funciona com qualquer impressora que tenha driver do Windows, de qualquer marca:
 |---|---|
 | Jato de tinta | Epson · Canon · HP · Brother |
 | Laser e multifuncionais | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
-| Fotográficas (jato de tinta) | Epson · Canon · HP |
-| Sublimação (foto) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Fotográficas (jato de tinta e dye-sub) | Epson · Canon · HP · DNP · Mitsubishi · Citizen · Canon Selphy |
+| Sublimação (brindes: canecas, camisetas, quebra-cabeças) | Epson EcoTank / SureColor F (com tinta sublimática) · Sawgrass · Ricoh |
 | Etiquetas / térmicas | Zebra · TSC · Brother QL · Dymo · Xprinter |
 
 Verificado até agora:
