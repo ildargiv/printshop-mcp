@@ -11,6 +11,29 @@ profili, kalibrasyon, hatta üreticiye özel sürücü seçenekleri. Bir kez anl
 
 > Durum: v0.2, Windows. Yeni: her türlü PDF’i basma (ör. diğer tasarım becerilerinden) ve çok sayıda ürünün otomatik yerleşimi (`layout`). Sırada: baskı hatalarından öğrenme, macOS/Linux.
 
+## Yazıcı uyumluluğu
+
+**Kâğıt yazıcıları içindir: mürekkep püskürtmeli, lazer, fotoğraf, süblimasyon ve etiket yazıcıları. 3D yazıcılar için değildir.**
+
+Markası ne olursa olsun Windows sürücüsü olan her yazıcıyla çalışır: baskı Windows’un standart yazdırma sisteminden geçer, üreticiye özel seçenekler (kâğıt türü, kenarlıksız, kalite) sürücünün kendi ayar penceresiyle profillere kaydedilir.
+
+| Yazıcı türü | Markalar |
+|---|---|
+| Mürekkep püskürtmeli | Epson · Canon · HP · Brother |
+| Lazer ve çok fonksiyonlu | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
+| Fotoğraf (mürekkep püskürtmeli) | Epson · Canon · HP |
+| Süblimasyon (fotoğraf) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Etiket / termal | Zebra · TSC · Brother QL · Dymo · Xprinter |
+
+Şu ana kadar doğrulananlar:
+
+| Yazıcı | Tür | Durum |
+|---|---|---|
+| Microsoft Print to PDF | sanal | ✅ tüm testler |
+| Epson L8050 | mürekkep püskürtmeli, fotoğraf | ✅ tepsiler, ortam türleri ve kenar boşlukları algılandı · deneme baskısı bekleniyor |
+
+Başka bir modelle mi bastınız? [Bildirin](https://github.com/ildargiv/printshop-mcp/issues/new?template=printer-report.yml), listeye ekleyelim. macOS ve Linux (CUPS) desteği planlanıyor.
+
 ## Kurulum
 
 **Claude Code** (beceri + MCP sunucusu tek eklentide):

@@ -11,6 +11,29 @@
 
 > 상태: v0.2, Windows. 새 기능: 모든 PDF 인쇄(다른 디자인 스킬의 결과물 등)와 여러 항목 자동 배치(`layout`). 다음 계획: 인쇄 불량으로부터 자가 학습, macOS/Linux.
 
+## 프린터 호환성
+
+**종이 프린터용입니다: 잉크젯, 레이저, 포토, 승화형, 라벨 프린터. 3D 프린터용이 아닙니다.**
+
+Windows 드라이버가 있는 프린터라면 브랜드와 관계없이 작동합니다. 인쇄는 Windows 표준 인쇄 시스템을 거치며, 제조사 전용 옵션(용지 종류, 무테 인쇄, 품질)은 드라이버 자체 설정 창을 통해 프로필에 저장됩니다.
+
+| 프린터 유형 | 브랜드 |
+|---|---|
+| 잉크젯 | Epson · Canon · HP · Brother |
+| 레이저 및 복합기 | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
+| 포토 (잉크젯) | Epson · Canon · HP |
+| 승화형 (포토) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| 라벨 / 감열 | Zebra · TSC · Brother QL · Dymo · Xprinter |
+
+지금까지 검증된 항목:
+
+| 프린터 | 유형 | 상태 |
+|---|---|---|
+| Microsoft Print to PDF | 가상 | ✅ 전체 테스트 통과 |
+| Epson L8050 | 잉크젯, 포토 | ✅ 급지함, 용지 종류, 여백 인식 · 실제 인쇄 테스트 예정 |
+
+다른 모델로 인쇄해 보셨나요? [알려 주세요](https://github.com/ildargiv/printshop-mcp/issues/new?template=printer-report.yml). 이 목록에 추가합니다. macOS와 Linux(CUPS) 지원을 계획하고 있습니다.
+
 ## 설치
 
 **Claude Code** (스킬 + MCP 서버를 하나의 플러그인으로):

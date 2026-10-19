@@ -11,6 +11,29 @@ nośnika, jakość, profil kolorów, kalibrację, a nawet opcje sterownika produ
 
 > Status: v0.2, Windows. Nowość: druk dowolnego PDF (np. z innych skilli projektowych) i automatyczna impozycja wielu elementów (`layout`). Wkrótce: nauka na błędach druku, macOS/Linux.
 
+## Zgodność z drukarkami
+
+**Do drukarek papierowych: atramentowych, laserowych, fotograficznych, termosublimacyjnych i etykiet. Nie do drukarek 3D.**
+
+Działa z każdą drukarką, która ma sterownik Windows, niezależnie od marki: druk przechodzi przez standardowy system drukowania Windows, a opcje producenta (rodzaj papieru, bez marginesów, jakość) zapisują się w profilach przez okno ustawień samego sterownika.
+
+| Typ drukarki | Marki |
+|---|---|
+| Atramentowe | Epson · Canon · HP · Brother |
+| Laserowe i wielofunkcyjne | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
+| Fotograficzne (atramentowe) | Epson · Canon · HP |
+| Termosublimacyjne (foto) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Etykiet / termiczne | Zebra · TSC · Brother QL · Dymo · Xprinter |
+
+Sprawdzone do tej pory:
+
+| Drukarka | Typ | Status |
+|---|---|---|
+| Microsoft Print to PDF | wirtualna | ✅ wszystkie testy |
+| Epson L8050 | atramentowa, foto | ✅ podajniki, nośniki i marginesy wykryte · wydruk testowy przed nami |
+
+Drukujesz na innym modelu? [Zgłoś go](https://github.com/ildargiv/printshop-mcp/issues/new?template=printer-report.yml), a dopiszemy go do listy. macOS i Linux (CUPS) są w planach.
+
 ## Instalacja
 
 **Claude Code** (skill + serwer MCP w jednej wtyczce):

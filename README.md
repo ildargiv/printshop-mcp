@@ -17,6 +17,29 @@ long names shrunk to fit, grey border = what your printer can't print.*
 > Status: v0.2, Windows. New: print any PDF (e.g. from other design skills) and automatic layout of many items.
 > Next: self-learning from print defects, macOS/Linux.
 
+## Printer compatibility
+
+**For paper printers: inkjet, laser, photo, dye-sublimation and label printers. Not for 3D printers.**
+
+Works with any printer that has a Windows driver, whatever the brand: printing goes through the standard Windows print system, and vendor-only options (paper types, borderless, print quality) are kept in profiles through the driver's own settings window.
+
+| Printer type | Brands |
+|---|---|
+| Inkjet | Epson · Canon · HP · Brother |
+| Laser and MFP | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
+| Photo (inkjet) | Epson · Canon · HP |
+| Dye-sublimation (photo) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Label / thermal | Zebra · TSC · Brother QL · Dymo · Xprinter |
+
+Verified so far:
+
+| Printer | Type | Status |
+|---|---|---|
+| Microsoft Print to PDF | virtual | ✅ full test suite |
+| Epson L8050 | inkjet, photo | ✅ trays, media types, margins detected · test print pending |
+
+Printed with another model? [Report it](https://github.com/ildargiv/printshop-mcp/issues/new?template=printer-report.yml) and it gets added here. macOS and Linux (CUPS) are planned.
+
 ## Install
 
 **Claude Code** (skill + MCP server in one plugin):

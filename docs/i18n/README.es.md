@@ -11,6 +11,29 @@ calidad, perfil de color, calibración e incluso opciones propias del fabricante
 
 > Estado: v0.2, Windows. Novedades: imprimir cualquier PDF (p. ej., de otras skills de diseño) e imposición automática de muchas piezas (`layout`). Próximamente: aprendizaje a partir de defectos, macOS/Linux.
 
+## Compatibilidad con impresoras
+
+**Para impresoras de papel: de inyección de tinta, láser, fotográficas, de sublimación y de etiquetas. No para impresoras 3D.**
+
+Funciona con cualquier impresora que tenga controlador de Windows, sea cual sea la marca: la impresión pasa por el sistema de impresión estándar de Windows y las opciones propias del fabricante (tipo de papel, sin bordes, calidad) se guardan en perfiles mediante la ventana de ajustes del propio controlador.
+
+| Tipo de impresora | Marcas |
+|---|---|
+| Inyección de tinta | Epson · Canon · HP · Brother |
+| Láser y multifunción | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
+| Fotográficas (inyección) | Epson · Canon · HP |
+| Sublimación (foto) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Etiquetas / térmicas | Zebra · TSC · Brother QL · Dymo · Xprinter |
+
+Verificado hasta ahora:
+
+| Impresora | Tipo | Estado |
+|---|---|---|
+| Microsoft Print to PDF | virtual | ✅ todas las pruebas |
+| Epson L8050 | inyección de tinta, foto | ✅ bandejas, soportes y márgenes detectados · falta impresión de prueba |
+
+¿Has impreso con otro modelo? [Infórmanos](https://github.com/ildargiv/printshop-mcp/issues/new?template=printer-report.yml) y lo añadimos aquí. macOS y Linux (CUPS) están previstos.
+
 ## Instalación
 
 **Claude Code** (skill + servidor MCP en un plugin):

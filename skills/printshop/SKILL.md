@@ -1,6 +1,6 @@
 ---
 name: printshop
-description: Design and physically print event materials and other paper products - badges, name tags, business cards, flyers, table tents, place cards, labels, certificates, mixed sheets - on the user's real printer with millimetre accuracy, using the printshop MCP server. Remembers the user's print profiles (printer, paper, tray, media, quality, colour, calibration). Use when the user wants something printed, wants print-ready layouts on A4/Letter sheets, asks to "print badges for the guest list", or mentions their printer, paper or a print that came out wrong.
+description: Design and physically print event materials and other paper products - badges, name tags, business cards, flyers, table tents, place cards, labels, certificates, mixed sheets - on the user's real printer with millimetre accuracy, using the printshop MCP server. Works with paper printers (inkjet, laser, photo, dye-sublimation, label), not 3D printers. Remembers the user's print profiles (printer, paper, tray, media, quality, colour, calibration). Use when the user wants something printed, wants print-ready layouts on A4/Letter sheets, asks to "print badges for the guest list", or mentions their printer, paper or a print that came out wrong.
 ---
 
 # printshop: the print shop inside the agent

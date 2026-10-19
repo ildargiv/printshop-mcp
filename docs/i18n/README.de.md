@@ -11,6 +11,29 @@ Farbprofil, Kalibrierung, sogar herstellerspezifische Treiberoptionen. Einmal er
 
 > Status: v0.2, Windows. Neu: beliebige PDFs drucken (z. B. aus anderen Design-Skills) und automatisches Ausschießen vieler Druckstücke (`layout`). Als Nächstes: Lernen aus Druckfehlern, macOS/Linux.
 
+## Druckerkompatibilität
+
+**Für Papierdrucker: Tintenstrahl-, Laser-, Foto-, Thermosublimations- und Etikettendrucker. Nicht für 3D-Drucker.**
+
+Funktioniert mit jedem Drucker, für den es einen Windows-Treiber gibt, egal welche Marke: Gedruckt wird über das Standard-Drucksystem von Windows, und herstellerspezifische Optionen (Papiertyp, randlos, Qualität) werden über das Einstellungsfenster des Treibers in Profilen gespeichert.
+
+| Druckertyp | Marken |
+|---|---|
+| Tintenstrahl | Epson · Canon · HP · Brother |
+| Laser und Multifunktion | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
+| Foto (Tintenstrahl) | Epson · Canon · HP |
+| Thermosublimation (Foto) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Etiketten / Thermo | Zebra · TSC · Brother QL · Dymo · Xprinter |
+
+Bisher geprüft:
+
+| Drucker | Typ | Status |
+|---|---|---|
+| Microsoft Print to PDF | virtuell | ✅ alle Tests |
+| Epson L8050 | Tintenstrahl, Foto | ✅ Fächer, Medientypen und Ränder erkannt · Testdruck steht aus |
+
+Mit einem anderen Modell gedruckt? [Melde es](https://github.com/ildargiv/printshop-mcp/issues/new?template=printer-report.yml), dann kommt es auf diese Liste. macOS und Linux (CUPS) sind geplant.
+
 ## Installation
 
 **Claude Code** (Skill + MCP-Server als ein Plugin):

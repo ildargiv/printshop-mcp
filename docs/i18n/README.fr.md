@@ -11,6 +11,29 @@ support, qualité, profil couleur, calibrage, et même les options propres au fa
 
 > Statut : v0.2, Windows. Nouveau : impression de n’importe quel PDF (par exemple issu d’autres skills de design) et imposition automatique de nombreux articles (`layout`). À venir : apprentissage à partir des défauts, macOS/Linux.
 
+## Compatibilité des imprimantes
+
+**Pour les imprimantes papier : jet d’encre, laser, photo, sublimation thermique et étiquettes. Pas pour les imprimantes 3D.**
+
+Fonctionne avec toute imprimante disposant d’un pilote Windows, quelle que soit la marque : l’impression passe par le système d’impression standard de Windows, et les options propres au fabricant (type de papier, sans marge, qualité) sont enregistrées dans les profils via la fenêtre de réglages du pilote.
+
+| Type d’imprimante | Marques |
+|---|---|
+| Jet d’encre | Epson · Canon · HP · Brother |
+| Laser et multifonction | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
+| Photo (jet d’encre) | Epson · Canon · HP |
+| Sublimation thermique (photo) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Étiquettes / thermique | Zebra · TSC · Brother QL · Dymo · Xprinter |
+
+Vérifié à ce jour:
+
+| Imprimante | Type | Statut |
+|---|---|---|
+| Microsoft Print to PDF | virtuelle | ✅ tous les tests |
+| Epson L8050 | jet d’encre, photo | ✅ bacs, supports et marges détectés · impression test à venir |
+
+Vous avez imprimé avec un autre modèle ? [Signalez-le](https://github.com/ildargiv/printshop-mcp/issues/new?template=printer-report.yml) et il sera ajouté ici. macOS et Linux (CUPS) sont prévus.
+
 ## Installation
 
 **Claude Code** (skill + serveur MCP en un seul plugin) :

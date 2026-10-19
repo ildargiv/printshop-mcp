@@ -1,0 +1,51 @@
+name: Printer report
+description: Tell us how printshop-mcp worked with your printer, so it can be added to the compatibility list.
+title: "[printer] "
+labels: ["printer-report"]
+body:
+  - type: input
+    id: model
+    attributes:
+      label: Printer brand and model
+      placeholder: Epson L8050, HP LaserJet Pro M404, DNP DS620...
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Printer type
+      options:
+        - Inkjet
+        - Laser / MFP
+        - Photo (inkjet)
+        - Dye-sublimation (photo)
+        - Label / thermal
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: paper
+    attributes:
+      label: Paper and size
+      placeholder: A4 plain 80 g, 10x15 glossy, 300 g cardstock...
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options:
+        - Works, sizes are exact
+        - Works after calibration (scale/offset in the profile)
+        - Prints, but something is wrong
+        - Does not print
+    validations:
+      required: true
+  - type: input
+    id: measured
+    attributes:
+      label: Measured size check (optional)
+      placeholder: "badge 90x55 came out 90x55 / 89.4x54.7"
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Windows version, driver options you used, anything odd. Remove personal data from logs and screenshots.

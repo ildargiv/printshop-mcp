@@ -10,6 +10,29 @@
 
 > 状态：v0.2，Windows。新功能：打印任意 PDF（例如其他设计技能的输出）以及多件物料自动拼版（`layout`）。下一步：从打印问题中自我学习、macOS/Linux。
 
+## 打印机兼容性
+
+**适用于纸张打印机：喷墨、激光、照片、热升华和标签打印机。不适用于 3D 打印机。**
+
+适用于任何装有 Windows 驱动程序的打印机，不限品牌：打印通过 Windows 标准打印系统完成，厂商专有选项（纸张类型、无边距、打印质量）通过驱动自身的设置窗口保存在配置中。
+
+| 打印机类型 | 品牌 |
+|---|---|
+| 喷墨 | Epson · Canon · HP · Brother |
+| 激光及多功能一体机 | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
+| 照片（喷墨） | Epson · Canon · HP |
+| 热升华（照片） | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| 标签 / 热敏 | Zebra · TSC · Brother QL · Dymo · Xprinter |
+
+目前已验证:
+
+| 打印机 | 类型 | 状态 |
+|---|---|---|
+| Microsoft Print to PDF | 虚拟 | ✅ 全部测试通过 |
+| Epson L8050 | 喷墨、照片 | ✅ 已识别纸盒、介质类型和边距 · 待实际打印测试 |
+
+用其他型号打印过？[提交报告](https://github.com/ildargiv/printshop-mcp/issues/new?template=printer-report.yml)，我们会加入此列表。 macOS 和 Linux（CUPS）支持在计划中。
+
 ## 安装
 
 **Claude Code**（技能 + MCP 服务器，一个插件）：

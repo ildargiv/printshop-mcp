@@ -11,6 +11,29 @@ qualità, profilo colore, calibrazione e perfino le opzioni proprietarie del dri
 
 > Stato: v0.2, Windows. Novità: stampa di qualsiasi PDF (ad es. da altre skill di design) e imposizione automatica di molti articoli (`layout`). In arrivo: apprendimento dai difetti di stampa, macOS/Linux.
 
+## Compatibilità con le stampanti
+
+**Per stampanti su carta: a getto d’inchiostro, laser, fotografiche, a sublimazione e per etichette. Non per stampanti 3D.**
+
+Funziona con qualsiasi stampante dotata di driver Windows, di qualunque marca: la stampa passa dal sistema di stampa standard di Windows e le opzioni proprietarie (tipo di carta, senza bordi, qualità) vengono salvate nei profili tramite la finestra di impostazioni del driver.
+
+| Tipo di stampante | Marche |
+|---|---|
+| Getto d’inchiostro | Epson · Canon · HP · Brother |
+| Laser e multifunzione | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
+| Fotografiche (getto d’inchiostro) | Epson · Canon · HP |
+| Sublimazione (foto) | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| Etichette / termiche | Zebra · TSC · Brother QL · Dymo · Xprinter |
+
+Verificato finora:
+
+| Stampante | Tipo | Stato |
+|---|---|---|
+| Microsoft Print to PDF | virtuale | ✅ tutti i test |
+| Epson L8050 | getto d’inchiostro, foto | ✅ cassetti, supporti e margini rilevati · stampa di prova in arrivo |
+
+Hai stampato con un altro modello? [Segnalalo](https://github.com/ildargiv/printshop-mcp/issues/new?template=printer-report.yml) e lo aggiungiamo qui. macOS e Linux (CUPS) sono in programma.
+
 ## Installazione
 
 **Claude Code** (skill + server MCP in un unico plugin):

@@ -11,6 +11,29 @@
 
 > ステータス：v0.2、Windows。新機能：任意の PDF の印刷（他のデザインスキルの出力など）と、多数のアイテムの自動面付け（`layout`）。今後：印刷不良からの自己学習、macOS/Linux 対応。
 
+## 対応プリンター
+
+**紙に印刷するプリンター用です：インクジェット、レーザー、フォト、昇華型、ラベルプリンター。3D プリンター用ではありません。**
+
+Windows ドライバーがあるプリンターなら、メーカーを問わず使えます。印刷は Windows 標準の印刷システムを通り、メーカー独自の設定（用紙の種類、フチなし、印刷品質）はドライバー自身の設定画面からプロファイルに保存されます。
+
+| プリンターの種類 | メーカー |
+|---|---|
+| インクジェット | Epson · Canon · HP · Brother |
+| レーザー・複合機 | HP · Brother · Canon · Kyocera · Xerox · Ricoh · Konica Minolta · Sharp · Lexmark · OKI · Pantum · Samsung |
+| フォト（インクジェット） | Epson · Canon · HP |
+| 昇華型（フォト） | DNP · Mitsubishi · Citizen · HiTi · Kodak · Canon Selphy |
+| ラベル / サーマル | Zebra · TSC · Brother QL · Dymo · Xprinter |
+
+現在までの検証:
+
+| プリンター | 種類 | 状態 |
+|---|---|---|
+| Microsoft Print to PDF | 仮想 | ✅ 全テスト合格 |
+| Epson L8050 | インクジェット・フォト | ✅ トレイ・用紙種類・余白を認識 · 実機印刷テストはこれから |
+
+別の機種で印刷しましたか？ [報告してください](https://github.com/ildargiv/printshop-mcp/issues/new?template=printer-report.yml)。この一覧に追加します。 macOS と Linux（CUPS）対応を予定しています。
+
 ## インストール
 
 **Claude Code**（スキルと MCP サーバーを 1 つのプラグインで）：
