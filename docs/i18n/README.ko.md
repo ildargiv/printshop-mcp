@@ -9,7 +9,7 @@
 
 <p align="center"><img src="../event-kit-a4-proof.png" width="420" alt="혼합 A4 시트 교정쇄"></p>
 
-> 상태: v0.1, Windows. 다음 계획: PDF 입력, 자동 혼합 배치, 인쇄 불량으로부터 자가 학습, macOS/Linux.
+> 상태: v0.2, Windows. 새 기능: 모든 PDF 인쇄(다른 디자인 스킬의 결과물 등)와 여러 항목 자동 배치(`layout`). 다음 계획: 인쇄 불량으로부터 자가 학습, macOS/Linux.
 
 ## 설치
 
@@ -44,7 +44,7 @@
 - **스킬** `skills/printshop`: 작업 흐름(프로필 → 디자인 → 교정쇄 → 인쇄 → 프로필 수정), HTML 규칙, 배치 참고 자료,
   템플릿: 명찰 90×55, 명함 90×50, A6 전단지, 테이블 텐트, 혼합 시트.
 - **MCP 도구**: `list_printers`, `describe_printer`, `list_profiles`, `save_profile`(`open_driver_dialog=true`로
-  제조사 옵션을 드라이버 창에서 한 번만 설정), `proof`, `print_job`, `printer_status`.
+  제조사 옵션을 드라이버 창에서 한 번만 설정), `layout`, `proof`, `print_job`, `printer_status`.
 - **HTML**: 각 용지는 `<section class="ps-sheet" style="width:210mm;height:297mm">`, mm 단위 레이아웃.
   `data-fit="9pt"`는 텍스트가 들어갈 때까지 줄이고, `data-cut`은 재단선을 추가합니다. 한국어는 `"Malgun Gothic"` 등의 글꼴을 사용하세요.
 

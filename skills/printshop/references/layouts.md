@@ -34,7 +34,7 @@ All sizes in mm. "Fits" assumes items edge to edge (shared cut lines) and ~4 mm 
 Centre a grid: left = (sheet_width - columns * item_width) / 2, top = (sheet_height - rows * item_height) / 2.
 Check the result is >= 4 mm from every edge.
 
-## Mixed packing recipe
+## Mixed packing recipe (manual; the `layout` tool does this automatically)
 
 1. Group items by profile (paper). One group = its own sheets.
 2. Inside a group sort by width. Make columns as wide as the widest item that has many copies

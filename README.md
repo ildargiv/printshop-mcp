@@ -14,8 +14,8 @@ colour profile, calibration, even vendor-only driver options. Explain your print
 *A mixed sheet (1 flyer + 3 badges + 4 business cards) as the agent sees it before printing: crop marks only where you cut,
 long names shrunk to fit, grey border = what your printer can't print.*
 
-> Status: v0.1, Windows. Coming next: PDF input (print any design skill's output), automatic mixed layout,
-> self-learning from print defects, macOS/Linux.
+> Status: v0.2, Windows. New: print any PDF (e.g. from other design skills) and automatic layout of many items.
+> Next: self-learning from print defects, macOS/Linux.
 
 ## Install
 
@@ -64,7 +64,8 @@ a layout reference (what fits on A4/Letter) and templates:
 |---|---|
 | `list_printers`, `describe_printer` | Printers, papers, trays, media types, printable area, saved profiles |
 | `list_profiles`, `save_profile`, `set_default_profile`, `delete_profile` | Remembered print setups; `open_driver_dialog=true` lets you set vendor options once in the driver window |
-| `proof` | Render + preflight: proof images and a job id |
+| `layout` | Pack many items (HTML designs, PDFs, images) onto sheets, grouped by paper, with crop marks |
+| `proof` | Render + preflight an HTML file or **any PDF**: proof images and a job id |
 | `print_job` | Print a proofed job (warnings need explicit confirmation) |
 | `printer_status` | Offline / out of paper / jammed, and the queue |
 

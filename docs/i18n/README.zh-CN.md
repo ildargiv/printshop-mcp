@@ -8,7 +8,7 @@
 
 <p align="center"><img src="../event-kit-a4-proof.png" width="420" alt="混排 A4 样张"></p>
 
-> 状态：v0.1，Windows。下一步：PDF 输入、自动混合拼版、从打印问题中自我学习、macOS/Linux。
+> 状态：v0.2，Windows。新功能：打印任意 PDF（例如其他设计技能的输出）以及多件物料自动拼版（`layout`）。下一步：从打印问题中自我学习、macOS/Linux。
 
 ## 安装
 
@@ -43,7 +43,7 @@
 - **技能** `skills/printshop`：工作流程（配置 → 设计 → 样张 → 打印 → 修正配置）、HTML 规则、拼版参考和模板：
   胸牌 90×55、名片 90×50、A6 传单、桌牌、混排页。
 - **MCP 工具**：`list_printers`、`describe_printer`、`list_profiles`、`save_profile`（`open_driver_dialog=true`
-  可在驱动窗口中一次性设置厂商选项）、`proof`、`print_job`、`printer_status`。
+  可在驱动窗口中一次性设置厂商选项）、`layout`、`proof`、`print_job`、`printer_status`。
 - **HTML**：每张纸是 `<section class="ps-sheet" style="width:210mm;height:297mm">`，以毫米排版；
   `data-fit="9pt"` 自动缩小文字以适应；`data-cut` 添加裁切线。中文请使用 `"Microsoft YaHei", "Noto Sans CJK SC"` 等字体。
 

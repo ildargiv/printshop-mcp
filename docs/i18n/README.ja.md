@@ -9,7 +9,7 @@
 
 <p align="center"><img src="../event-kit-a4-proof.png" width="420" alt="A4 混在シートのプルーフ"></p>
 
-> ステータス：v0.1、Windows。今後：PDF 入力、自動混在面付け、印刷不良からの自己学習、macOS/Linux 対応。
+> ステータス：v0.2、Windows。新機能：任意の PDF の印刷（他のデザインスキルの出力など）と、多数のアイテムの自動面付け（`layout`）。今後：印刷不良からの自己学習、macOS/Linux 対応。
 
 ## インストール
 
@@ -44,7 +44,7 @@
 - **スキル** `skills/printshop`：作業手順（プロファイル → デザイン → プルーフ → 印刷 → プロファイル修正）、HTML ルール、
   面付けリファレンス、テンプレート：名札 90×55、名刺 90×50（日本の名刺 91×55 にも調整可）、A6 チラシ、卓上三角札、混在シート。
 - **MCP ツール**：`list_printers`、`describe_printer`、`list_profiles`、`save_profile`（`open_driver_dialog=true` で
-  メーカー独自設定をドライバー画面で一度だけ設定）、`proof`、`print_job`、`printer_status`。
+  メーカー独自設定をドライバー画面で一度だけ設定）、`layout`、`proof`、`print_job`、`printer_status`。
 - **HTML**：各用紙は `<section class="ps-sheet" style="width:210mm;height:297mm">`、レイアウトは mm 単位。
   `data-fit="9pt"` で文字を枠に収まるまで縮小、`data-cut` でトンボを追加。日本語には `"Yu Gothic", "Noto Sans CJK JP"` などのフォントを。
 

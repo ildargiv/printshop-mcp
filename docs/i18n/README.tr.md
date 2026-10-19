@@ -9,7 +9,7 @@ profili, kalibrasyon, hatta üreticiye özel sürücü seçenekleri. Bir kez anl
 
 <p align="center"><img src="../event-kit-a4-proof.png" width="420" alt="Karma A4 sayfa provası"></p>
 
-> Durum: v0.1, Windows. Sırada: PDF girişi, otomatik karma yerleşim, baskı hatalarından öğrenme, macOS/Linux.
+> Durum: v0.2, Windows. Yeni: her türlü PDF’i basma (ör. diğer tasarım becerilerinden) ve çok sayıda ürünün otomatik yerleşimi (`layout`). Sırada: baskı hatalarından öğrenme, macOS/Linux.
 
 ## Kurulum
 
@@ -44,7 +44,7 @@ profili, kalibrasyon, hatta üreticiye özel sürücü seçenekleri. Bir kez anl
 - **Beceri** `skills/printshop`: iş akışı (profiller → tasarım → prova → baskı → profil düzeltme), HTML kuralları,
   yerleşim rehberi ve şablonlar: yaka kartı 90×55, kartvizit 90×50, A6 el ilanı, masa isimliği, karma sayfa.
 - **MCP araçları**: `list_printers`, `describe_printer`, `list_profiles`, `save_profile` (üretici seçeneklerini sürücü
-  penceresinde bir kez ayarlamak için `open_driver_dialog=true`), `proof`, `print_job`, `printer_status`.
+  penceresinde bir kez ayarlamak için `open_driver_dialog=true`), `layout`, `proof`, `print_job`, `printer_status`.
 - **HTML**: her sayfa `<section class="ps-sheet" style="width:210mm;height:297mm">`, yerleşim mm cinsinden;
   `data-fit="9pt"` metni sığana kadar küçültür; `data-cut` kesim işaretleri ekler.
 

@@ -30,7 +30,12 @@ the server (see "Setup" at the end) instead of improvising with the OS print dia
    | `table-tent-a4.html` | Folded table tent / name card, landscape A4 |
    | `event-kit-a4.html` | Mixed sheet: flyer + badges + business cards together |
    Copy the template into the user's working folder, then edit text, colours (`:root` variables) and item count.
-   For data from a guest list (CSV, spreadsheet, pasted text), generate one item per row.
+   **Many items or a mix (a badge per guest, cards, flyers)? Use the `layout` tool instead of placing them by
+   hand:** give one item per distinct design (`html` filling the box, or `src` = PDF/image) with `width_mm`,
+   `height_mm`, `copies` and a paper `group`; it packs them onto sheets (rotating where it saves paper), adds crop
+   marks and writes one HTML file per paper group. Reuse a template's CSS via `css` and its item markup in `html`.
+   **PDFs from other tools** (a business card or flyer someone designed): `proof` a PDF directly (each page becomes
+   a sheet), or put it into `layout` as `src` to print many copies per sheet.
 3. **Proof.** Call `proof` with `path` (preferred; images resolve relative to the file) or `html`.
    Look at the proof images: grey = area the printer cannot print, red/orange frames = problems.
    Fix every warning you can (text clipped, image below 200 dpi, content in the grey zone, wrong paper) and proof
@@ -68,10 +73,10 @@ Sheet capacity, mixed-layout recipes and paper sizes: see `references/layouts.md
 
 ## Mixed sheets (badges + cards + flyers together)
 
-To save paper, pack different items on shared sheets (see `event-kit-a4.html`). Group items by the profile they
-need: business cards on cardstock, flyers on glossy - different paper means different sheets and different
-profiles. Pack in columns of equal width, items edge to edge, then fill leftover space with smaller items.
-Report the plan before printing: "3 sheets: 1 cardstock (20 cards), 2 plain (12 badges + 4 flyers)".
+Use `layout`. Give items that need different paper different `group`s (cards on "cardstock", flyers on
+"glossy"): each group becomes its own file, proofed and printed with its own profile. Report the plan before
+printing, using the numbers `layout` returns: "3 sheets: 1 cardstock (10 cards), 2 plain (12 badges + 4 flyers)".
+`event-kit-a4.html` shows a hand-made mixed sheet for when you need full control.
 
 ## Safety
 

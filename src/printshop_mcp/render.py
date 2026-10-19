@@ -11,13 +11,14 @@ from pathlib import Path
 
 from PIL import Image
 
+from . import pdf
 from .win import PrintError
 
 CSS_DPI = 96.0
 ORIGIN = "http://printshop.local/"
 
 BASE_CSS = """
-html, body { margin: 0; padding: 0; background: #888; }
+html, body { margin: 0; padding: 0; background: #fff; }   /* white: sub-pixel sheet edges must not pick up a colour */
 .ps-sheet { position: relative; overflow: hidden; background: #fff; box-sizing: border-box;
             margin: 0 0 10px 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 """
@@ -123,6 +124,7 @@ def render_sheets(html, base_dir, dpi):
     """Returns (list of PIL RGB images, list of sheet info dicts)."""
     from playwright.sync_api import sync_playwright
     base = Path(base_dir).resolve()
+    errors = []
     if "<head>" in html:
         html = html.replace("<head>", "<head><style>" + BASE_CSS + "</style>", 1)
     else:
@@ -132,13 +134,21 @@ def render_sheets(html, base_dir, dpi):
         url = r.request.url
         if not url.startswith(ORIGIN):
             return r.abort() if url.startswith("file:") else r.continue_()   # web fonts / CDN images are allowed
-        rel = url[len(ORIGIN):].split("?")[0].split("#")[0]
+        from urllib.parse import parse_qs, unquote, urlsplit
+        u = urlsplit(url)
+        rel = u.path[1:]
         if rel in ("", "index.html"):
             return r.fulfill(status=200, content_type="text/html; charset=utf-8", body=html)
-        from urllib.parse import unquote
         f = (base / unquote(rel)).resolve()
         if base not in f.parents or not f.is_file():
             return r.fulfill(status=404, body="")
+        if f.suffix.lower() == ".pdf":                # <img src="file.pdf?page=2"> -> rasterised page
+            try:
+                page = int((parse_qs(u.query).get("page") or ["1"])[0])
+                return r.fulfill(status=200, content_type="image/png", body=pdf.page_png(f, page))
+            except Exception as e:
+                errors.append(f"{f.name}: {e}")
+                return r.fulfill(status=404, body="")
         r.fulfill(status=200, content_type=mimetypes.guess_type(f.name)[0] or "application/octet-stream", body=f.read_bytes())
 
     with sync_playwright() as p:
@@ -150,6 +160,8 @@ def render_sheets(html, base_dir, dpi):
             page.evaluate("document.fonts.ready")
             page.evaluate(HELPERS_JS)
             info = page.evaluate(INSPECT_JS)
+            if errors:
+                raise PrintError("; ".join(errors), "bad_pdf")
             if not info:
                 raise PrintError('No sheets found. Wrap each physical sheet in <section class="ps-sheet" '
                                  'style="width:210mm;height:297mm">...</section>.', "no_sheets")

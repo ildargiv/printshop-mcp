@@ -9,7 +9,7 @@
 
 <p align="center"><img src="../event-kit-a4-proof.png" width="420" alt="मिश्रित A4 शीट का प्रूफ़"></p>
 
-> स्थिति: v0.1, Windows। आगे: PDF इनपुट, स्वचालित मिश्रित लेआउट, प्रिंट की ग़लतियों से सीखना, macOS/Linux।
+> स्थिति: v0.2, Windows। नया: कोई भी PDF छापें (जैसे दूसरी डिज़ाइन स्किल से) और कई चीज़ों का स्वचालित लेआउट (`layout`)। आगे: प्रिंट की ग़लतियों से सीखना, macOS/Linux।
 
 ## इंस्टॉल करें
 
@@ -44,7 +44,7 @@
 - **स्किल** `skills/printshop`: काम का क्रम (प्रोफ़ाइल → डिज़ाइन → प्रूफ़ → प्रिंट → प्रोफ़ाइल सुधार), HTML नियम,
   लेआउट संदर्भ और टेम्पलेट: बैज 90×55, विज़िटिंग कार्ड 90×50, A6 फ़्लायर, टेबल टेंट, मिश्रित शीट।
 - **MCP टूल**: `list_printers`, `describe_printer`, `list_profiles`, `save_profile` (निर्माता के विकल्प ड्राइवर विंडो में
-  एक बार सेट करने के लिए `open_driver_dialog=true`), `proof`, `print_job`, `printer_status`।
+  एक बार सेट करने के लिए `open_driver_dialog=true`), `layout`, `proof`, `print_job`, `printer_status`।
 - **HTML**: हर शीट `<section class="ps-sheet" style="width:210mm;height:297mm">` है, लेआउट mm में;
   `data-fit="9pt"` टेक्स्ट को फ़िट होने तक छोटा करता है; `data-cut` कटिंग मार्क जोड़ता है। हिंदी के लिए `"Nirmala UI"` जैसे फ़ॉन्ट लें।
 

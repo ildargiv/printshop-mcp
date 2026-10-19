@@ -11,7 +11,7 @@
 
 <p align="center"><img src="../event-kit-a4-proof.png" width="420" alt="بروفة لورقة A4 مختلطة"></p>
 
-> الحالة: الإصدار 0.1، ويندوز. قريبًا: إدخال PDF، ترتيب مختلط تلقائي، التعلّم من أخطاء الطباعة، macOS/Linux.
+> الحالة: الإصدار 0.2، ويندوز. جديد: طباعة أي ملف PDF (مثلًا من مهارات تصميم أخرى) وترتيب تلقائي لعناصر كثيرة (`layout`). قريبًا: التعلّم من أخطاء الطباعة، macOS/Linux.
 
 ## التثبيت
 
@@ -54,7 +54,7 @@
 - **المهارة** `skills/printshop`: سير العمل (الملفات ← التصميم ← البروفة ← الطباعة ← تصحيح الملف)، قواعد HTML،
   مرجع الترتيب وقوالب: بطاقات تعريف 90×55، بطاقات عمل 90×50، نشرات A6، بطاقة طاولة، ورقة مختلطة.
 - **أدوات MCP**: `list_printers` و`describe_printer` و`list_profiles` و`save_profile` (`open_driver_dialog=true` لضبط
-  خيارات الشركة المصنّعة مرة واحدة) و`proof` و`print_job` و`printer_status`.
+  خيارات الشركة المصنّعة مرة واحدة) و`layout`, `proof` و`print_job` و`printer_status`.
 - **HTML**: كل ورقة هي `<section class="ps-sheet" style="width:210mm;height:297mm">` والتخطيط بالمليمتر؛
   `data-fit="9pt"` يصغّر النص حتى يتّسع، و`data-cut` يضيف علامات القص. للعربية استخدم `dir="rtl"` وخط `"Segoe UI", Tahoma`.
 

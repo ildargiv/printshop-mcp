@@ -9,7 +9,7 @@ Farbprofil, Kalibrierung, sogar herstellerspezifische Treiberoptionen. Einmal er
 
 <p align="center"><img src="../event-kit-a4-proof.png" width="420" alt="Probedruck eines gemischten A4-Bogens"></p>
 
-> Status: v0.1, Windows. Als Nächstes: PDF-Eingabe, automatisches gemischtes Ausschießen, Lernen aus Druckfehlern, macOS/Linux.
+> Status: v0.2, Windows. Neu: beliebige PDFs drucken (z. B. aus anderen Design-Skills) und automatisches Ausschießen vieler Druckstücke (`layout`). Als Nächstes: Lernen aus Druckfehlern, macOS/Linux.
 
 ## Installation
 
@@ -44,7 +44,7 @@ Benötigt [uv](https://docs.astral.sh/uv/) und Edge oder Chrome (zum Rendern).
 - **Skill** `skills/printshop`: Ablauf (Profile → Gestaltung → Probedruck → Druck → Profil korrigieren), HTML-Regeln,
   Ausschieß-Referenz und Vorlagen: Namensschilder 90×55, Visitenkarten 90×50, A6-Flyer, Tischaufsteller, gemischter Bogen.
 - **MCP-Tools**: `list_printers`, `describe_printer`, `list_profiles`, `save_profile` (`open_driver_dialog=true`, um
-  Herstelleroptionen einmalig im Treiberfenster festzulegen), `proof`, `print_job`, `printer_status`.
+  Herstelleroptionen einmalig im Treiberfenster festzulegen), `layout`, `proof`, `print_job`, `printer_status`.
 - **HTML**: jeder Bogen ist `<section class="ps-sheet" style="width:210mm;height:297mm">`, Layout in mm;
   `data-fit="9pt"` verkleinert Text, bis er passt; `data-cut` setzt Schnittmarken.
 

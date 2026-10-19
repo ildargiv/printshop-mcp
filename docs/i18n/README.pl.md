@@ -9,7 +9,7 @@ nośnika, jakość, profil kolorów, kalibrację, a nawet opcje sterownika produ
 
 <p align="center"><img src="../event-kit-a4-proof.png" width="420" alt="Wydruk próbny mieszanego arkusza A4"></p>
 
-> Status: v0.1, Windows. Wkrótce: wejście PDF, automatyczna impozycja mieszana, nauka na błędach druku, macOS/Linux.
+> Status: v0.2, Windows. Nowość: druk dowolnego PDF (np. z innych skilli projektowych) i automatyczna impozycja wielu elementów (`layout`). Wkrótce: nauka na błędach druku, macOS/Linux.
 
 ## Instalacja
 
@@ -44,7 +44,7 @@ Wymaga [uv](https://docs.astral.sh/uv/) oraz Edge lub Chrome (do renderowania).
 - **Skill** `skills/printshop`: przebieg pracy (profile → projekt → wydruk próbny → druk → poprawka profilu), zasady HTML,
   ściąga z impozycji i szablony: identyfikatory 90×55, wizytówki 90×50, ulotki A6, wizytownik stołowy, arkusz mieszany.
 - **Narzędzia MCP**: `list_printers`, `describe_printer`, `list_profiles`, `save_profile` (`open_driver_dialog=true`, by
-  raz ustawić opcje producenta w oknie sterownika), `proof`, `print_job`, `printer_status`.
+  raz ustawić opcje producenta w oknie sterownika), `layout`, `proof`, `print_job`, `printer_status`.
 - **HTML**: każdy arkusz to `<section class="ps-sheet" style="width:210mm;height:297mm">`, układ w mm;
   `data-fit="9pt"` zmniejsza tekst, aż się zmieści; `data-cut` dodaje znaczniki cięcia.
 

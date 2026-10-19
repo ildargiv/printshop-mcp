@@ -9,7 +9,7 @@ support, qualité, profil couleur, calibrage, et même les options propres au fa
 
 <p align="center"><img src="../event-kit-a4-proof.png" width="420" alt="Épreuve d’une feuille A4 mixte"></p>
 
-> Statut : v0.1, Windows. À venir : entrée PDF, imposition mixte automatique, apprentissage à partir des défauts, macOS/Linux.
+> Statut : v0.2, Windows. Nouveau : impression de n’importe quel PDF (par exemple issu d’autres skills de design) et imposition automatique de nombreux articles (`layout`). À venir : apprentissage à partir des défauts, macOS/Linux.
 
 ## Installation
 
@@ -44,7 +44,7 @@ Nécessite [uv](https://docs.astral.sh/uv/) et Edge ou Chrome (pour le rendu).
 - **Skill** `skills/printshop` : déroulé (profils → mise en page → épreuve → impression → correction du profil), règles
   HTML, référence d’imposition et modèles : badges 90×55, cartes 90×50, flyers A6, chevalet de table, feuille mixte.
 - **Outils MCP** : `list_printers`, `describe_printer`, `list_profiles`, `save_profile` (`open_driver_dialog=true` pour
-  régler une fois les options du fabricant), `proof`, `print_job`, `printer_status`.
+  régler une fois les options du fabricant), `layout`, `proof`, `print_job`, `printer_status`.
 - **HTML** : chaque feuille est `<section class="ps-sheet" style="width:210mm;height:297mm">`, mise en page en mm ;
   `data-fit="9pt"` réduit le texte jusqu’à ce qu’il tienne ; `data-cut` ajoute des traits de coupe.
 

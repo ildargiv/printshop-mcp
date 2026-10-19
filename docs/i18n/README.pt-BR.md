@@ -9,7 +9,7 @@ perfil de cor, calibração e até opções exclusivas do fabricante. Explique u
 
 <p align="center"><img src="../event-kit-a4-proof.png" width="420" alt="Prova de uma folha A4 mista"></p>
 
-> Status: v0.1, Windows. Em breve: entrada de PDF, imposição mista automática, aprendizado com defeitos de impressão, macOS/Linux.
+> Status: v0.2, Windows. Novo: imprimir qualquer PDF (por exemplo, de outras skills de design) e imposição automática de muitos itens (`layout`). Em breve: aprendizado com defeitos de impressão, macOS/Linux.
 
 ## Instalação
 
@@ -44,7 +44,7 @@ Requer [uv](https://docs.astral.sh/uv/) e Edge ou Chrome (para renderização).
 - **Skill** `skills/printshop`: fluxo (perfis → design → prova → impressão → ajuste do perfil), regras de HTML,
   referência de imposição e modelos: crachás 90×55, cartões 90×50, flyers A6, prisma de mesa, folha mista.
 - **Ferramentas MCP**: `list_printers`, `describe_printer`, `list_profiles`, `save_profile` (`open_driver_dialog=true`
-  para definir uma vez as opções do fabricante), `proof`, `print_job`, `printer_status`.
+  para definir uma vez as opções do fabricante), `layout`, `proof`, `print_job`, `printer_status`.
 - **HTML**: cada folha é `<section class="ps-sheet" style="width:210mm;height:297mm">`, layout em mm;
   `data-fit="9pt"` reduz o texto para caber; `data-cut` adiciona marcas de corte.
 

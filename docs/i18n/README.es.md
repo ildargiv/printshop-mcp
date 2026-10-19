@@ -9,7 +9,7 @@ calidad, perfil de color, calibración e incluso opciones propias del fabricante
 
 <p align="center"><img src="../event-kit-a4-proof.png" width="420" alt="Prueba de una hoja A4 mixta"></p>
 
-> Estado: v0.1, Windows. Próximamente: entrada PDF, imposición mixta automática, aprendizaje a partir de defectos, macOS/Linux.
+> Estado: v0.2, Windows. Novedades: imprimir cualquier PDF (p. ej., de otras skills de diseño) e imposición automática de muchas piezas (`layout`). Próximamente: aprendizaje a partir de defectos, macOS/Linux.
 
 ## Instalación
 
@@ -44,7 +44,7 @@ Requiere [uv](https://docs.astral.sh/uv/) y Edge o Chrome (para renderizar).
 - **Skill** `skills/printshop`: flujo de trabajo (perfiles → diseño → prueba → impresión → ajuste del perfil), reglas
   HTML, referencia de imposición y plantillas: acreditaciones 90×55, tarjetas 90×50, flyers A6, tarjeta de mesa, hoja mixta.
 - **Herramientas MCP**: `list_printers`, `describe_printer`, `list_profiles`, `save_profile` (`open_driver_dialog=true`
-  para fijar una sola vez las opciones del fabricante), `proof`, `print_job`, `printer_status`.
+  para fijar una sola vez las opciones del fabricante), `layout`, `proof`, `print_job`, `printer_status`.
 - **HTML**: cada hoja es `<section class="ps-sheet" style="width:210mm;height:297mm">`, maquetación en mm;
   `data-fit="9pt"` reduce el texto para que quepa; `data-cut` añade marcas de corte.
 

@@ -1,12 +1,12 @@
 [project]
 name = "printshop-mcp"
-version = "0.1.0"
+version = "0.2.0"
 description = "The print shop inside your AI agent: millimetre-accurate printing from HTML, with remembered print profiles."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 keywords = ["mcp", "printing", "agent", "claude", "print", "badges", "skills"]
-dependencies = ["mcp>=1.10", "pillow>=10", "playwright>=1.45", "anyio>=4"]
+dependencies = ["mcp>=1.10", "pillow>=10", "playwright>=1.45", "anyio>=4", "pypdfium2>=4"]
 
 [project.scripts]
 printshop-mcp = "printshop_mcp.cli:main"

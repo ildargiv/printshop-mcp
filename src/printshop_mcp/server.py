@@ -9,7 +9,7 @@ except ImportError:                    # mcp 1.x
     from mcp.server.fastmcp import FastMCP as MCPServer, Image
     from mcp.server.fastmcp.exceptions import ToolError
 
-from . import jobs, win
+from . import impose, jobs, win
 from .profiles import ProfileStore, public
 
 GUIDE = """# printshop-mcp: how to write printable HTML
@@ -37,6 +37,7 @@ Workflow:
 2. When the user mentions a new setup ("thick cardstock in the rear tray", "glossy photo paper"), save it with
    save_profile. If vendor-specific options matter, use open_driver_dialog=true so the user sets them once in the
    driver window - they are remembered forever.
+   Many items (badges per guest, cards, flyers, PDFs from other tools)? Use layout: it packs them onto sheets.
 3. proof -> look at the proof images and warnings -> fix the HTML or tell the user -> print_job(job_id).
    Never pass accept_warnings=true without telling the user what the warnings are.
 4. After printing ask whether the result is right. Size or position off? Update the profile calibration
@@ -185,7 +186,8 @@ async def proof(html: str | None = None, path: str | None = None, printer: str |
                 profile: str | None = None, copies: int = 1, dpi: int | None = None) -> list:
     """Render printable HTML exactly as it will print and check it. Returns a job (job_id, errors, warnings,
     per-sheet geometry) and proof images: grey = area the printer cannot print, red/orange frames = problems.
-    Give either html (a string) or path (an .html file; images resolve relative to it).
+    Give either html (a string) or path: an .html file (images resolve relative to it) or a .pdf
+    (every page becomes a sheet of the page's size - use this to print PDFs made by other tools).
     Without printer/profile the default profile of the last used printer is taken."""
     job = await _run(jobs.preflight, html=html, path=path, printer=printer, profile=profile, copies=copies, dpi=dpi)
     out = [json.dumps({k: v for k, v in job.items() if k != "proofs"}, ensure_ascii=False)]
@@ -194,6 +196,28 @@ async def proof(html: str | None = None, path: str | None = None, printer: str |
     if len(job["proofs"]) > 4:
         out.append(f"{len(job['proofs']) - 4} more proof images on disk: " + ", ".join(job["proofs"][4:]))
     return out
+
+
+@mcp.tool(structured_output=False)
+async def layout(items: list[dict], sheet: str | list[float] = "A4", landscape: bool = False, margin_mm: float = 5,
+                 gap_mm: float = 0, crop_marks: bool = True, css: str = "", out: str | None = None,
+                 title: str = "layout") -> str:
+    """Automatically pack many items onto sheets (imposition) and write printable HTML, one file per paper group.
+
+    items: [{"name": "badge", "width_mm": 90, "height_mm": 55, "copies": 1, "group": "plain",
+             "html": "<div ...>...</div>"  OR  "src": "card.pdf" | "photo.jpg", "page": 1,
+             "rotate": true, "fit": "fill"|"contain"}]
+      - html: the item's design, filling its box (use position:absolute children, mm units, data-fit). Shared
+        styles go into css. One entry per distinct item (e.g. one per guest), copies for identical ones.
+      - src: a PDF page or image (e.g. a business card PDF from another tool), path relative to out's folder.
+      - group: items that need different paper (cardstock vs plain) must have different groups; each group
+        becomes its own file to proof and print with its own profile.
+    sheet: A4, A3, A5, Letter, Legal, Tabloid or [width_mm, height_mm]. margin_mm: keep >= printer margin (~4).
+    gap_mm: space between items (0 = shared cut lines). Items rotate automatically when that saves paper.
+    out: .html path (or folder) for the result; must contain any src files. Returns files, sheet counts, paper use."""
+    res = await _run(impose.layout, items, sheet=sheet, landscape=landscape, margin_mm=margin_mm, gap_mm=gap_mm,
+                     crop_marks=crop_marks, css=css, out=out, title=title)
+    return json.dumps(res, ensure_ascii=False)
 
 
 @mcp.tool(structured_output=False)

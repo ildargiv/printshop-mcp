@@ -6,7 +6,7 @@ import time
 import uuid
 from pathlib import Path
 
-from PIL import Image, ImageCms, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageCms, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 from . import win
 from .profiles import ProfileStore, data_dir
@@ -43,7 +43,7 @@ def _cleanup():
 def _content_bbox_mm(img, dpi):
     """Bounding box of non-white pixels, mm."""
     g = ImageOps.invert(img.convert("L")).point(lambda v: 255 if v > 6 else 0)
-    b = g.getbbox()
+    b = g.filter(ImageFilter.MedianFilter(3)).getbbox()      # ignore 1-px specks from sub-pixel element edges
     return None if b is None else [round(v * 25.4 / dpi, 1) for v in b]
 
 
@@ -105,7 +105,11 @@ def preflight(html=None, path=None, printer=None, profile=None, copies=1, dpi=No
         f = Path(path).resolve()
         if not f.is_file():
             raise PrintError(f"File not found: {f}", "bad_args")
-        html, base_dir = f.read_text("utf-8"), f.parent
+        if f.suffix.lower() == ".pdf":                 # each PDF page becomes a sheet of the same size
+            from .pdf import sheets_html
+            html, base_dir = sheets_html(f), f.parent
+        else:
+            html, base_dir = f.read_text("utf-8"), f.parent
     else:
         base_dir = Path(os.environ.get("PRINTSHOP_ASSETS", os.getcwd()))
     copies = max(1, int(copies or 1))
