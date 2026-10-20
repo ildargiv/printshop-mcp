@@ -58,6 +58,9 @@ Printed with another model? [Report it](https://github.com/ildargiv/printshop-mc
     "args": ["--from", "git+https://github.com/ildargiv/printshop-mcp", "printshop-mcp"] } } }
 ```
 
+Pin a release instead of the latest code: `git+https://github.com/ildargiv/printshop-mcp@v0.3.0`
+(see [Releases](https://github.com/ildargiv/printshop-mcp/releases); each release also has a wheel for `pip install`).
+
 Needs [uv](https://docs.astral.sh/uv/) and Edge or Chrome (used for rendering).
 
 ## Why not just Ctrl+P?

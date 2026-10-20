@@ -1,0 +1,32 @@
+name: Release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+          activate-environment: true
+      - name: Check version matches tag
+        shell: pwsh
+        run: |
+          $v = (Select-String -Path pyproject.toml -Pattern '^version = "(.+)"').Matches[0].Groups[1].Value
+          if ("v$v" -ne "${{ github.ref_name }}") { throw "pyproject version $v does not match tag ${{ github.ref_name }}" }
+      - name: Test
+        run: |
+          uv pip install -e ".[dev]"
+          python -m pytest -q tests
+      - name: Build
+        run: uv build
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          (Get-Content .github/release-notes.md -Raw) -replace '@TAG', '@${{ github.ref_name }}' | Set-Content notes.md -Encoding utf8
+          gh release create "${{ github.ref_name }}" (Get-ChildItem dist/*).FullName --title "printshop-mcp ${{ github.ref_name }}" --generate-notes --notes-file notes.md
