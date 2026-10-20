@@ -120,7 +120,8 @@ async def save_profile(name: str, printer: str | None = None, paper: str | None 
                        dpi: int | None = None, scale_x: float | None = None, scale_y: float | None = None,
                        offset_x_mm: float | None = None, offset_y_mm: float | None = None,
                        tags: list[str] | None = None, notes: str | None = None,
-                       mirror: bool | None = None, open_driver_dialog: bool = False, make_default: bool = False) -> str:
+                       mirror: bool | None = None, paper_price: float | None = None, ink_price_5pct: float | None = None,
+                       currency: str | None = None, open_driver_dialog: bool = False, make_default: bool = False) -> str:
     """Create or update a remembered print profile. Only the given fields change.
 
     paper: "sheet" (paper size follows the HTML sheet, default) or "driver" (keep the paper set in the driver).
@@ -129,6 +130,9 @@ async def save_profile(name: str, printer: str | None = None, paper: str | None 
     perceptual|relative|saturation|absolute. dpi: render resolution (default 300).
     scale_x/scale_y (0.97-1.03) and offset_x_mm/offset_y_mm (-5..5): calibration applied to every job.
     mirror: print every sheet mirrored (sublimation / heat-transfer paper for mugs, T-shirts). Proofs stay readable.
+    paper_price: cost of one sheet; ink_price_5pct: ink cost of one A4 page at 5% coverage of one colour
+    (bottle or cartridge price / ISO page yield printed on the box); currency: e.g. "RUB", "USD".
+    With these, every proof includes a cost estimate.
     tags/notes: what this profile is for ("business cards", "cardstock 300g") so it can be found later.
     open_driver_dialog: shows the printer driver's own settings window to the user; everything they choose there,
     including vendor-only options, is stored in the profile.
@@ -158,7 +162,8 @@ async def save_profile(name: str, printer: str | None = None, paper: str | None 
                        media=_pick(caps["media_types"], media, "media") if media else None,
                        quality=quality, color=color, duplex=duplex, icc=icc, intent=intent, dpi=dpi,
                        scale_x=scale_x, scale_y=scale_y, offset_x_mm=offset_x_mm, offset_y_mm=offset_y_mm,
-                       mirror=mirror, tags=tags, notes=notes)
+                       mirror=mirror, paper_price=paper_price, ink_price_5pct=ink_price_5pct, currency=currency,
+                       tags=tags, notes=notes)
         if make_default:
             store.set_default(name)
         q = public(p)
@@ -186,7 +191,7 @@ async def set_default_profile(name: str) -> str:
 async def proof(html: str | None = None, path: str | None = None, printer: str | None = None,
                 profile: str | None = None, copies: int = 1, dpi: int | None = None) -> list:
     """Render printable HTML exactly as it will print and check it. Returns a job (job_id, errors, warnings,
-    per-sheet geometry) and proof images: grey = area the printer cannot print, red/orange frames = problems.
+    per-sheet geometry, estimate: sheets, ink coverage measured on the pixels, cost if the profile has prices) and proof images: grey = area the printer cannot print, red/orange frames = problems.
     Give either html (a string) or path: an .html file (images resolve relative to it) or a .pdf
     (every page becomes a sheet of the page's size - use this to print PDFs made by other tools).
     Without printer/profile the default profile of the last used printer is taken."""

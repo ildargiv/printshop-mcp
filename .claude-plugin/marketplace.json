@@ -8,7 +8,7 @@
       "name": "printshop",
       "source": "./",
       "description": "The print shop inside your agent: design badges, business cards, flyers and mixed sheets as HTML and print them on your real printer with millimetre accuracy. Remembers your print profiles.",
-      "version": "0.2.1"
+      "version": "0.3.0"
     }
   ]
 }

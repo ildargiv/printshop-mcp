@@ -7,7 +7,9 @@ from pathlib import Path
 os.environ.setdefault("PRINTSHOP_HOME", tempfile.mkdtemp())
 from PIL import Image, ImageDraw                         # noqa: E402
 
-from printshop_mcp import impose, jobs                    # noqa: E402
+import pytest                                            # noqa: E402
+
+from printshop_mcp import impose, jobs, win               # noqa: E402
 from printshop_mcp.win import PrintError                  # noqa: E402
 
 PDF = "Microsoft Print to PDF"
@@ -50,6 +52,8 @@ def test_too_big():
 
 
 def test_layout_and_pdf_render():
+    if PDF not in win.list_printers():
+        pytest.skip("Microsoft Print to PDF is not installed")
     d = Path(tempfile.mkdtemp())
     w, h = round(105 / 25.4 * 300), round(148 / 25.4 * 300)
     im = Image.new("RGB", (w, h), "white")

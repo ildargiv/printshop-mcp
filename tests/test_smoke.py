@@ -6,6 +6,8 @@ import tempfile
 from pathlib import Path
 
 os.environ["PRINTSHOP_HOME"] = tempfile.mkdtemp()
+import pytest                                            # noqa: E402
+
 from printshop_mcp import jobs, win                      # noqa: E402
 from printshop_mcp.profiles import ProfileStore          # noqa: E402
 
@@ -13,7 +15,13 @@ PDF = "Microsoft Print to PDF"
 EX = Path(__file__).parent.parent / "examples" / "badges.html"
 
 
+def need_pdf_printer():
+    if PDF not in win.list_printers():
+        pytest.skip("Microsoft Print to PDF is not installed")
+
+
 def test_profile_and_print_to_pdf():
+    need_pdf_printer()
     store = ProfileStore()
     store.save("pdf calibrated", devmode=win.default_devmode(PDF), printer=PDF, scale_x=1.01, offset_y_mm=-1.5,
                tags=["test"])
@@ -29,6 +37,7 @@ def test_profile_and_print_to_pdf():
     box = re.search(rb"MediaBox\s*\[\s*0(?:\.0+)?\s+0(?:\.0+)?\s+([\d.]+)\s+([\d.]+)", out.read_bytes())
     assert abs(float(box[1]) - 595.28) < 1 and abs(float(box[2]) - 841.89) < 1   # A4 in points
     assert store.get("pdf calibrated")["uses"] == 1
+    assert job["estimate"]["sheets"] == 1 and job["sheets"][0]["coverage_pct"]["total"] > 0
     try:
         jobs.print_job(job["job_id"], accept_warnings=True, output=str(out))
         raise AssertionError("printed twice")
@@ -37,6 +46,7 @@ def test_profile_and_print_to_pdf():
 
 
 def test_mirror_for_sublimation():
+    need_pdf_printer()
     import pypdfium2 as pdfium
     home = Path(os.environ["PRINTSHOP_HOME"])
     (home / "m.html").write_text('<section class="ps-sheet" style="width:210mm;height:297mm"><div style="position:absolute;'

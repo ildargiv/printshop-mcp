@@ -40,7 +40,8 @@ the server (see "Setup" at the end) instead of improvising with the OS print dia
 3. **Proof.** Call `proof` with `path` (preferred; images resolve relative to the file) or `html`.
    Look at the proof images: grey = area the printer cannot print, red/orange frames = problems.
    Fix every warning you can (text clipped, image below 200 dpi, content in the grey zone, wrong paper) and proof
-   again. Paper usage is reported - mention it for big jobs.
+   again. Every proof has an `estimate` (sheets, ink coverage, and cost when the profile has `paper_price` /
+   `ink_price_5pct`): quote it to the user before big jobs, e.g. "3 sheets, about 11 RUB".
 4. **Print.** Call `print_job(job_id)`. If warnings remain that you cannot fix, explain them to the user and only
    then pass `accept_warnings=true`. Never print more than the user asked for.
 5. **Close the loop.** Ask whether the print came out right and, for cut items, remind them where the crop marks

@@ -10,6 +10,7 @@ from PIL import Image, ImageCms, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 from . import win
 from .profiles import ProfileStore, data_dir
+from .estimate import coverage, job_estimate
 from .render import render_sheets
 from .win import PrintError
 
@@ -176,14 +177,15 @@ def preflight(html=None, path=None, printer=None, profile=None, copies=1, dpi=No
             (errors if it["level"] == "error" else warnings).append(f"sheet {n}: {it['msg']}")
         sheets.append({"sheet": n, "name": sh["name"], "size_mm": [w, h], "orientation": "landscape" if w > h else "portrait",
                        "printable_mm": geom["printable_mm"], "device_dpi": geom["dpi"], "content_mm": cb,
-                       "images": len(sh["images"]), "issues": len(issues)})
+                       "images": len(sh["images"]), "issues": len(issues), "coverage_pct": coverage(img)})
 
     total = len(images) * copies
     if total > max_sheets():
         errors.append(f"{total} sheets exceeds the limit of {max_sheets()} (env PRINTSHOP_MAX_SHEETS).")
     job = {"job_id": job_id, "created": time.time(), "printer": printer, "profile": prof["name"] if prof else None,
            "dpi": dpi, "copies": copies, "total_sheets": total, "sheets": sheets, "errors": errors, "warnings": warnings,
-           "status": "blocked" if errors else ("needs_confirmation" if warnings else "ready"), "proofs": proofs}
+           "status": "blocked" if errors else ("needs_confirmation" if warnings else "ready"), "proofs": proofs,
+           "estimate": job_estimate(sheets, copies, prof)}
     (jdir / "job.json").write_text(json.dumps(job, ensure_ascii=False, indent=1), "utf-8")
     if not prof:
         job["tip"] = ("No saved profile for this printer: default driver settings are used. "

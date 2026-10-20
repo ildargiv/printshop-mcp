@@ -1,5 +1,7 @@
 # printshop-mcp
 
+[![CI](https://github.com/ildargiv/printshop-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/ildargiv/printshop-mcp/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 **English** · [Русский](docs/i18n/README.ru.md) · [简体中文](docs/i18n/README.zh-CN.md) · [Español](docs/i18n/README.es.md) · [Português](docs/i18n/README.pt-BR.md) · [Deutsch](docs/i18n/README.de.md) · [Français](docs/i18n/README.fr.md) · [日本語](docs/i18n/README.ja.md) · [한국어](docs/i18n/README.ko.md) · [Italiano](docs/i18n/README.it.md) · [Türkçe](docs/i18n/README.tr.md) · [Polski](docs/i18n/README.pl.md) · [Українська](docs/i18n/README.uk.md) · [العربية](docs/i18n/README.ar.md) · [हिन्दी](docs/i18n/README.hi.md)
 
 🌐 **[ildargiv.github.io/printshop-mcp](https://ildargiv.github.io/printshop-mcp/)**
@@ -89,7 +91,7 @@ a layout reference (what fits on A4/Letter) and templates:
 | `list_printers`, `describe_printer` | Printers, papers, trays, media types, printable area, saved profiles |
 | `list_profiles`, `save_profile`, `set_default_profile`, `delete_profile` | Remembered print setups; `open_driver_dialog=true` lets you set vendor options once in the driver window; `mirror=true` for sublimation transfer paper |
 | `layout` | Pack many items (HTML designs, PDFs, images) onto sheets, grouped by paper, with crop marks |
-| `proof` | Render + preflight an HTML file or **any PDF**: proof images and a job id |
+| `proof` | Render + preflight an HTML file or **any PDF**: proof images, a job id and a **cost estimate** (sheets, ink coverage measured on the pixels, money if the profile has prices) |
 | `print_job` | Print a proofed job (warnings need explicit confirmation) |
 | `printer_status` | Offline / out of paper / jammed, and the queue |
 
