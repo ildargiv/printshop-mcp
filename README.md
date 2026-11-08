@@ -73,6 +73,20 @@ Needs [uv](https://docs.astral.sh/uv/) and Edge or Chrome (used for rendering).
 | Settings forgotten every time | Named profiles with the full driver state, calibration and ICC |
 | One kind of item per print | Badges, cards and flyers packed on shared sheets with crop marks |
 
+## Which one: this or photoshop-print-mcp?
+
+The same author also publishes [photoshop-print-mcp](https://github.com/ildargiv/print-mcp) (repository `print-mcp`, being renamed). Both keep print profiles and can mirror for sublimation, but they solve different jobs.
+
+| | **printshop-mcp** (this repo) | [**photoshop-print-mcp**](https://github.com/ildargiv/print-mcp) |
+|---|---|---|
+| Starting point | a design from scratch (HTML or PDF): layout, proof, print | finished image files (JPG, PNG, TIFF, PSD), printed as a folder |
+| Engine | Windows print system, rendered straight to device pixels | Adobe Photoshop over COM |
+| Colour | profiles with the full driver state, calibration and ICC | fixed ICC pipeline, driver auto-correction off |
+| Needs | `uv` and Edge or Chrome, no Photoshop | Photoshop 26.x, one-time setup in two dialogs |
+| Pick it when | you want badges, cards, flyers or mixed sheets laid out and proofed by the agent | you already have the files and Photoshop colour management is your workflow |
+
+Not sure? Start here.
+
 ## What the agent gets
 
 **Skill** (`skills/printshop`): the workflow (profiles -> design -> proof -> print -> fix the profile), HTML rules,
